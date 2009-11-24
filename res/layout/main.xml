@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:id="@+id/HomeRootLayout"><LinearLayout android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/HomeTitleLayout" android:gravity="center" android:orientation="vertical">
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/HomeTitleText" android:textStyle="bold" android:textSize="50px" android:text="@string/app_name"></TextView>
+<TextView android:id="@+id/HomeSubtitleText" android:text="@string/home_subtitle" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+</LinearLayout>
+<LinearLayout android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:id="@+id/HomeButtonLayout" android:gravity="center" android:orientation="horizontal"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/HomeSearchForClosestMatchButton" android:text="Get Single Card Info"></Button>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/HomeSearchForButton" android:text="Search for Cards"></Button>
+</LinearLayout>
+</LinearLayout>

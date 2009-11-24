@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="horizontal"><LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:gravity="center" android:orientation="vertical" android:layout_weight=".4"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="40px" android:textStyle="bold" android:text="Card Name"></TextView>
+
+<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal"><LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1"></LinearLayout><LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:layout_weight=".4"><EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="none" android:id="@+id/SearchForClosestMatchEditText" android:lines="1" android:hint="Input card name"></EditText></LinearLayout><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/SearchForClosestMatchSubmitButton" android:text="Search"></Button><LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1"></LinearLayout>
+
+
+
+</LinearLayout>
+
+
+</LinearLayout>
+
+
+
+</LinearLayout>

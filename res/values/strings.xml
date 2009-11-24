@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Magic Val</string>
+
+
+
+<string name="home_subtitle">Developed by Paul Gibler</string>
+
+<string name="search_for_closest_match_activity">Search For Single Card</string>
+<string name="display_single_card_activity">Display Single Card</string>
+
+<string name="search_for_activity">Search For Cards</string>
+<string name="search_label">Search</string>
+</resources>

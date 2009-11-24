@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      android:versionCode="1"
+      android:versionName="1.0" package="com.magicval">
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:label="@string/app_name" android:name=".MagicValActivity">
+            
+        <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+</activity>
+        
+
+    <activity android:stateNotNeeded="false" android:noHistory="false" android:label="@string/search_for_closest_match_activity" android:name=".SearchForClosestMatchActivity">
+	</activity>
+    
+ 
+	
+<activity android:stateNotNeeded="true" android:noHistory="true" android:label="@string/display_single_card_activity" android:name=".DisplaySingleCardActivity">
+
+</activity>
+<activity android:label="@string/search_for_activity" android:name=".SearchForActivity" android:noHistory="false" android:stateNotNeeded="false" android:launchMode="standard"><intent-filter>
+	
+    
+
+<action android:name="android.intent.action.SEARCH"></action><category android:name="android.intent.category.DEFAULT"></category>
+</intent-filter>
+<meta-data android:name="android.app.searchable" 
+                       android:resource="@xml/searchable" />
+</activity>
+
+
+<meta-data android:name="android.app.default_searchable" android:value=".SearchForActivity"></meta-data>
+</application>
+    <uses-sdk android:minSdkVersion="5" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+
+</manifest> 
