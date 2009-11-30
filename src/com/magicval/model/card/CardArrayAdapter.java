@@ -45,8 +45,8 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         Card card = cards.get(position);
         TextView name = (TextView)view.findViewById(R.id.CardSearchRowName);
         TextView price = (TextView)view.findViewById(R.id.CardSearchRowPrice);
-        name.setText(card.getName());
-        price.setText("$"+String.valueOf(card.getMonetaryValue().getCurrentPrice()));
+        name.setText(card.getNameFromSearch());
+        price.setText(card.getMonetaryValue().getCurrentPriceAsCurrency());
 
         return (view);
 	}

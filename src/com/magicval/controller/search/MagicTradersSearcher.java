@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -23,7 +25,7 @@ import com.magicval.model.card.Card;
  * @author Paul Gibler
  *
  */
-public class MagicTradersSearcher implements Searcher {
+public class MagicTradersSearcher implements Searcher<Card> {
 	
 	private String domain = "http://magictraders.com";
 	private String path = "/cgi-bin/query.cgi";
@@ -58,7 +60,7 @@ public class MagicTradersSearcher implements Searcher {
 	}
 
 	@Override
-	public Card searchForClosestMatch(String search) throws IOException, IllegalArgumentException {
+	public Card searchForClosestMatch(String search) throws IOException {
 		// This method uses an extremely naive way of finding the closest match.
 		// It simply performs a string comparison of the search against the
 		// beginning of each string that matched.
@@ -97,10 +99,6 @@ public class MagicTradersSearcher implements Searcher {
 				bestMatchName = c.getName();
 				closeness = Math.abs(search.compareTo(bestMatchName));
 			}
-		}
-		if(bestMatch == null)
-		{
-			throw new IllegalArgumentException("No card could be found from the search string: "+ search);
 		}
 		return bestMatch;
 	}
@@ -156,9 +154,23 @@ public class MagicTradersSearcher implements Searcher {
 		String front = parts[1].trim();
 		try {
 			Double.valueOf(front);
-			return new Card(parts[0].trim(), front, parts[4].trim(), parts[5].trim());
+			String name = parts[0].trim();
+			return new Card(generateRealName(name), name, front, parts[4].trim(), parts[5].trim());
 		} catch(Exception e) {
-			return new Card(parts[0] + ", " + parts[1], parts[2].trim(), parts[5].trim(), parts[6].trim());
+			String name = parts[0] + ", " + parts[1];
+			return new Card(generateRealName(name), name, parts[2].trim(), parts[5].trim(), parts[6].trim());
+		}
+	}
+	
+	private String generateRealName(String foundName) {
+		Pattern p = Pattern.compile("(.*?) (\\(\\w*\\))");
+		Matcher m = p.matcher(foundName);
+		if(m.find())
+		{
+			return m.group(1);
+		} else {
+			System.out.println("there was diff");
+			return foundName;
 		}
 	}
 

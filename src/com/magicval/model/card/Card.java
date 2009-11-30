@@ -1,9 +1,8 @@
 package com.magicval.model.card;
 
-
 import java.io.IOException;
 
-import com.magicval.model.image.CardImageLoader;
+import com.magicval.model.image.GathererCardImageLoader;
 
 import android.graphics.Bitmap;
 import android.os.Parcel;
@@ -31,6 +30,19 @@ public class Card implements Parcelable {
 		return name;
 	}
 	/**
+	 * The name returned from searching for this Card.
+	 */
+	private String nameFromSearch;
+	/**
+	 * Returns the name returned from searching for this Card.
+	 * This string is the one found during
+	 * the price search of the card.
+	 * @return The found name of the card.
+	 */
+	public String getNameFromSearch() {
+		return nameFromSearch;
+	}
+	/**
 	 * The monetary value of the card.
 	 */
 	private MonetaryValue monetaryValue;
@@ -50,23 +62,26 @@ public class Card implements Parcelable {
 	 * @param high The highest price the card has been.
 	 * @param low The lowest price the card has been.
 	 */
-	public Card(final String name, final String current, final String high, final String low)
+	public Card(final String name, final String nameFromSearch, final String current, final String high, final String low)
 	{
 		this.name = name;
+		this.nameFromSearch = nameFromSearch;
 		this.monetaryValue = new MonetaryValue(current, high, low);
 	}
 	
 	/**
 	 * Creates an instance of Card.
 	 * @param name The name of the card.
+	 * @param nameFromSearch The actual string that was the card name.
 	 * @param value The MonetaryValue of the card. Contains current price, highest price, and lowest price.
 	 */
-	public Card(final String name, MonetaryValue value)
+	public Card(final String name, final String nameFromSearch, MonetaryValue value)
 	{
 		this.name = name;
+		this.nameFromSearch = nameFromSearch;
 		this.monetaryValue = value;
 	}
-	
+
 	/**
 	 * Creates an instance of Card from a Parcel.
 	 * @param p The Parcel to create this card from.
@@ -82,7 +97,7 @@ public class Card implements Parcelable {
 	 * @throws IOException If the image fails to load, throw this exception.
 	 */
 	public Bitmap getImage() throws IOException {
-		return new CardImageLoader().getCardImage(this);
+		return new GathererCardImageLoader().getImage(this);
 	}
 	
 	// Parcelable methods

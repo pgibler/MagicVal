@@ -28,7 +28,7 @@ import android.widget.EditText;
  */
 public class SearchForClosestMatchActivity extends Activity {
 	
-	private final Searcher mts = new MagicTradersSearcher();
+	private final Searcher<Card> mts = new MagicTradersSearcher();
 	private EditText input;
 	private ProgressDialog pd;
 	
@@ -91,8 +91,10 @@ public class SearchForClosestMatchActivity extends Activity {
 				Intent i = new Intent(SearchForClosestMatchActivity.this, DisplaySingleCardActivity.class);
 				i.putExtra("Card", result.card);
 				startActivity(i);
-			} else {
+			} else if(result.exception != null) {
 				showAlert(result.exception.getMessage());
+			} else {
+				showAlert("No card could match the search.");
 			}
 		}
 	}

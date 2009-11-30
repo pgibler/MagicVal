@@ -24,7 +24,7 @@ import android.widget.AdapterView;
  */
 public class SearchForActivity extends ListActivity {
 
-	private Searcher searcher;
+	private Searcher<Card> searcher;
 	private ArrayList<Card> cards;
 	private SearchForActivity ref;
 	private ProgressDialog pd;

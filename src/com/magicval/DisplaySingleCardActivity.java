@@ -24,10 +24,10 @@ public class DisplaySingleCardActivity extends Activity {
         Card c = b.getParcelable("Card");
         MonetaryValue v = c.getMonetaryValue();
         
-        setTxt(R.id.DisplaySingleCardNameText, c.getName());
-        setTxt(R.id.DisplaySingleCardCurrentPriceTextView, v.getCurrentPrice());
-        setTxt(R.id.DisplaySingleCardHighPriceTextView, v.getHighPrice());
-        setTxt(R.id.DisplaySingleCardLowPriceTextView, v.getLowPrice());
+        setTxt(R.id.DisplaySingleCardNameText, c.getNameFromSearch());
+        setTxt(R.id.DisplaySingleCardCurrentPriceTextView, v.getCurrentPriceAsCurrency());
+        setTxt(R.id.DisplaySingleCardHighPriceTextView, v.getHighPriceAsCurrency());
+        setTxt(R.id.DisplaySingleCardLowPriceTextView, v.getLowPriceAsCurrency());
         
         FrameLayout frame = (FrameLayout) findViewById(R.id.DisplaySingleCardImageFrameLayout);
         ImageView image = new ImageView(this);
@@ -42,11 +42,6 @@ public class DisplaySingleCardActivity extends Activity {
 			text.setText("No image available for this card");
 			frame.addView(text);
 		}
-	}
-	
-	private void setTxt(int viewid, double d)
-	{
-		setTxt(viewid, String.valueOf(d));
 	}
 	
 	private void setTxt(int viewid, String txt)

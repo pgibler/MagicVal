@@ -3,25 +3,25 @@ package com.magicval.controller.search;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.magicval.model.card.Card;
+import android.os.Parcelable;
 
 /**
- * Searcher classes can pull Card date from a source, and return
+ * Searcher classes can pull arbitrary date from a source, and return
  * either best matches or lists of matches.
  * @author Paul Gibler
  *
  */
-public interface Searcher {
+public interface Searcher<E extends Parcelable> {
 	/**
 	 * Generates an ArrayList of results from a search string.
-	 * We use ArrayList since Card is Parcelable and it is far easier
-	 * to pass ArrayLists of Parcelable objects around in Activities.
+	 * We use ArrayList since it is far easier to pass ArrayLists
+	 * of Parcelable objects around in the Android app framework.
 	 * Any trailing whitespace will be removed.
 	 * @param search A search to find cards on.
 	 * @return A map of card names and their prices.
 	 * @throws IOException Throws this exception if the retrieval fails.
 	 */
-	public ArrayList<Card> searchFor(String search) throws IOException;
+	public ArrayList<E> searchFor(String search) throws IOException;
 	
 	/**
 	 * Performs a 'closest match' to the search string. That is, uses some sort of
@@ -32,5 +32,5 @@ public interface Searcher {
 	 * @return The 'closest match' to the search string. If no match is found, returns null.
 	 * @throws IOException Throws this exception if the retrieval fails.
 	 */
-	public Card searchForClosestMatch(String search) throws IOException, IllegalArgumentException;
+	public E searchForClosestMatch(String search) throws IOException;
 }
