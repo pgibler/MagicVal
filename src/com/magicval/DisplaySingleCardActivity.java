@@ -7,6 +7,7 @@ import com.magicval.model.card.MonetaryValue;
 import com.magicval.R;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,12 +31,13 @@ public class DisplaySingleCardActivity extends Activity {
         setTxt(R.id.DisplaySingleCardLowPriceTextView, v.getLowPriceAsCurrency());
         
         FrameLayout frame = (FrameLayout) findViewById(R.id.DisplaySingleCardImageFrameLayout);
-        ImageView image = new ImageView(this);
         
-        int val = 15;
-        image.setPadding(val, val, val, val);
         try {
-			image.setImageBitmap(c.getImage());
+        	Bitmap cardImage = c.getImage();
+        	ImageView image = new ImageView(this);
+            int val = 15;
+            image.setPadding(val, val, val, val);
+			image.setImageBitmap(cardImage);
 	        frame.addView(image);
 		} catch (IOException e) {
 			TextView text = new TextView(this);
