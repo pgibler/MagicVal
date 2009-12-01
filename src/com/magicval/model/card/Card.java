@@ -43,7 +43,7 @@ public class Card implements Parcelable {
 	/**
 	 * The name returned from searching for this Card.
 	 */
-	private String nameFromSearch;
+	private String nameFromSearch = null;
 	/**
 	 * Returns the name returned from searching for this Card.
 	 * This string is the one found during
@@ -51,6 +51,10 @@ public class Card implements Parcelable {
 	 * @return The found name of the card.
 	 */
 	public String getNameFromSearch() {
+		if(nameFromSearch == null)
+		{
+			nameFromSearch = name.replace(" ", "%20");
+		}
 		return nameFromSearch;
 	}
 	/**
@@ -157,16 +161,6 @@ public class Card implements Parcelable {
 	private void init(String name, String nameFromSearch, MonetaryValue monetaryValue) {
 		this.name = name;
 		this.nameFromSearch = nameFromSearch;
-		this.nameForURL = createURLFriendlyName(name);
 		this.monetaryValue = monetaryValue;
-	}
-
-	/**
-	 * Generates a URL friendly version of this card name.
-	 * @param cardName The name of the Card to be formatted.
-	 * @return The name of the Card to be used in URLs.
-	 */
-	private String createURLFriendlyName(String cardName) {
-		return cardName.replace(" ", "%20");
 	}
 }
