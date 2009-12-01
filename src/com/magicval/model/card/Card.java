@@ -163,7 +163,7 @@ public class Card implements Parcelable {
 
 	/**
 	 * Generates a URL friendly version of this card name.
-	 * @param nameForURL
+	 * @param cardName The name of the Card to be formatted.
 	 * @return The name of the Card to be used in URLs.
 	 */
 	private String createURLFriendlyName(String cardName) {
