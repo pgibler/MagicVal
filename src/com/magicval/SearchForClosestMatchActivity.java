@@ -45,7 +45,7 @@ public class SearchForClosestMatchActivity extends Activity {
 				// If they hit enter just invoke the search.
 		        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 		        	search();
-		          return true;
+		        	return true;
 		        }
 		        return false;
 		    }
