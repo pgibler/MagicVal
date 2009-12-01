@@ -23,6 +23,7 @@ import com.magicval.model.card.Card;
 
 public class GathererCardImageLoader implements ImageLoader<Card> {
 
+	// Maybe I'll use the imageURL as a default if the card image is not loaded...
 	//private String imageURL = "http://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Magic_the_gathering-card_back.jpg/250px-Magic_the_gathering-card_back.jpg";
 	//private String cacheBust = "&cacheBust=1259350413520";
 	private String searchURL = "http://gatherer.wizards.com/Handlers/InlineCardSearch.ashx?nameFragment=";
@@ -38,8 +39,6 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 	
 	@Override
 	public Bitmap getImage(Card card) throws IOException {
-		//return loadImage(imageURL);
-		
 		String urlCardName = card.getNameForURL();
 		JSONObject jo = searchFor(urlCardName);
 		try
