@@ -40,7 +40,7 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 	public Bitmap getImage(Card card) throws IOException {
 		//return loadImage(imageURL);
 		
-		JSONObject jo = searchFor(card.getName());
+		JSONObject jo = searchFor(card.getNameForURL());
 		try
 		{
 			JSONArray resultsArray = jo.getJSONArray("Results");

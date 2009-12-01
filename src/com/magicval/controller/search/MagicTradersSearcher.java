@@ -153,12 +153,16 @@ public class MagicTradersSearcher implements Searcher<Card> {
 		String[] parts = line.split(",");
 		String front = parts[1].trim();
 		try {
+			// If the "front" is a number, that means there is no comma in the card name.
+			// If this is the case, the first index of the parts array is the entire name,
+			// since no part of the name appears after the comma.
 			Double.valueOf(front);
 			String name = parts[0].trim();
 			return new Card(generateRealName(name), name, front, parts[4].trim(), parts[5].trim());
 		} catch(Exception e) {
-			String name = parts[0] + ", " + parts[1];
-			return new Card(generateRealName(name), name, parts[2].trim(), parts[5].trim(), parts[6].trim());
+			String name = parts[0] + "," + parts[1];
+			String realName = generateRealName(name);
+			return new Card(realName, name, parts[2].trim(), parts[5].trim(), parts[6].trim());
 		}
 	}
 	
@@ -169,7 +173,6 @@ public class MagicTradersSearcher implements Searcher<Card> {
 		{
 			return m.group(1);
 		} else {
-			System.out.println("there was diff");
 			return foundName;
 		}
 	}
