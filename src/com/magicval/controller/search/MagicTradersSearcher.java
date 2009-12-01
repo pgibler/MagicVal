@@ -40,6 +40,7 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	public MagicTradersSearcher() {
 		// Prepare HTTP request
 		client = new DefaultHttpClient();
+		pattern = Pattern.compile("(.*?) (\\(\\w*\\))");
 	}
 	
 	@Override
@@ -166,9 +167,10 @@ public class MagicTradersSearcher implements Searcher<Card> {
 		}
 	}
 	
+	Pattern pattern;
+	
 	private String generateRealName(String foundName) {
-		Pattern p = Pattern.compile("(.*?) (\\(\\w*\\))");
-		Matcher m = p.matcher(foundName);
+		Matcher m = pattern.matcher(foundName);
 		if(m.find())
 		{
 			return m.group(1);
