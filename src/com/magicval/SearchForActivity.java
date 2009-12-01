@@ -58,6 +58,7 @@ public class SearchForActivity extends ListActivity {
 			// If we catch an exception here, that means that our Bundle did not contain
 			// the ArrayList of cards. Thus, we need to search for them based on the search query.
 			pd = ProgressDialog.show(this, "Performing some magic", "Retrieving list of cards", true,false);
+			//hideKeyboard();
 			new SearchForAsyncTask().execute(query);
 		}
 
