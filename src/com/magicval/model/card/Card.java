@@ -32,18 +32,22 @@ public class Card implements Parcelable {
 	/**
 	 * A URL friendly version of the name of this Card.
 	 */
-	private String nameForURL;
+	private String nameForURL = null;
 	/**
 	 * Returns a URL friendly version of the name of this Card.
 	 * @return A URL friendly version of the name of this Card.
 	 */
 	public String getNameForURL() {
+		if(nameForURL == null)
+		{
+			nameForURL = name.replace(" ", "%20");
+		}
 		return nameForURL;
 	}
 	/**
 	 * The name returned from searching for this Card.
 	 */
-	private String nameFromSearch = null;
+	private String nameFromSearch;
 	/**
 	 * Returns the name returned from searching for this Card.
 	 * This string is the one found during
@@ -51,10 +55,6 @@ public class Card implements Parcelable {
 	 * @return The found name of the card.
 	 */
 	public String getNameFromSearch() {
-		if(nameFromSearch == null)
-		{
-			nameFromSearch = name.replace(" ", "%20");
-		}
 		return nameFromSearch;
 	}
 	/**
