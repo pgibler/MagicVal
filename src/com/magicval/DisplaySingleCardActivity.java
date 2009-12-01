@@ -9,7 +9,9 @@ import com.magicval.R;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,7 +61,7 @@ public class DisplaySingleCardActivity extends Activity {
 	}*/
 	
 	private View generateView(Bundle b) {
-		View v;
+		View v = null;
 		try {
 			card = b.getParcelable("Card");
         	// TODO Make it so that if the user clicks on the card image,
@@ -73,6 +75,10 @@ public class DisplaySingleCardActivity extends Activity {
 		} catch (IOException e) {
 			TextView text = new TextView(ref);
 			text.setText("No image available for this card");
+			text.setLayoutParams(new LayoutParams(
+					LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT));
+			text.setGravity(Gravity.CENTER);
 			v = text;
 		}
 		return v;
