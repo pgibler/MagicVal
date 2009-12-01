@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 
 import com.magicval.model.card.Card;
 
@@ -47,12 +48,59 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 			JSONObject firstResult = (JSONObject)resultsArray.get(0);
 			String cardID = firstResult.getString("ID");
 			String search = cardSearchURL + cardID;
-			return loadImage(search);
+			Bitmap b = loadImage(search);
+			// TODO Remove white is very slow, maybe we'll remove it.
+			b = removeWhite(b);
+			return b;
 		} catch(JSONException e) {
 			throw new IOException("Could not read in card image properly.");
 		}
 	}
 	
+	private Bitmap removeWhite(Bitmap b) {
+		b = b.copy(b.getConfig(), true);
+		int bWidth = b.getWidth()-1;
+		int bHeight = b.getHeight()-1;
+		int x = 0;
+		int y = 0;
+		int currentPixel;
+		while(y < bHeight)
+		{
+			// Remove the non-black pixels both ways.
+			while(x < bWidth)
+			{
+				// Alter current pixel.
+				b.setPixel(x,y,Color.TRANSPARENT);
+				// Alter pixel opposite horizontally, same y.
+				b.setPixel(bWidth-x,y,Color.TRANSPARENT);
+				// Alter pixel opposite vertically, same x.
+				b.setPixel(x,bHeight-y,Color.TRANSPARENT);
+				// Alter pixel opposite horizontally and vertically.
+				b.setPixel(bWidth-x,bHeight-y,Color.TRANSPARENT);
+				
+				x++;
+				
+				currentPixel = b.getPixel(x, y);
+				
+				// If we see a black pixel, go to the next row.
+				if(x >= bWidth || currentPixel < Color.GRAY)
+				{
+					break;
+				}
+			}
+			x = 0;  
+			y++;
+			
+			currentPixel = b.getPixel(x, y);
+			
+			if(y >= bHeight || currentPixel < Color.GRAY)
+			{
+				break;
+			}
+		}
+		return b;
+	}
+
 	private JSONObject searchFor(String search) throws IOException {
 		String urlWithQuery = searchURL + search;
 		
