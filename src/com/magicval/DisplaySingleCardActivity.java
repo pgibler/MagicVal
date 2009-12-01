@@ -33,6 +33,8 @@ public class DisplaySingleCardActivity extends Activity {
         FrameLayout frame = (FrameLayout) findViewById(R.id.DisplaySingleCardImageFrameLayout);
         
         try {
+        	// TODO Make it so that if the user clicks on the card image,
+        	// it expands to the center of the screen for easier viewing.
         	Bitmap cardImage = c.getImage();
         	ImageView image = new ImageView(this);
             int val = 15;
