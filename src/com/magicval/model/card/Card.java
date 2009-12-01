@@ -71,6 +71,23 @@ public class Card implements Parcelable {
 	}
 	
 	/**
+	 * Stores the image of the Card;
+	 */
+	private Bitmap image = null;
+	/**
+	 * Loads this Card's image. Lazily loads the Card image.
+	 * @return A Bitmap image of the Card.
+	 * @throws IOException If the image fails to load, throw this exception.
+	 */
+	public Bitmap getImage() throws IOException {
+		if(image == null)
+		{
+			image = new GathererCardImageLoader().getImage(this);
+		}
+		return image;
+	}
+	
+	/**
 	 * Creates an instance of Card.
 	 * @param name The name of the card.
 	 * @param current The current price of the card.
@@ -102,15 +119,6 @@ public class Card implements Parcelable {
 		readFromParcel(p);
 	}
 	
-	/**
-	 * Loads this Card's image.
-	 * @return A Bitmap image of the Card.
-	 * @throws IOException If the image fails to load, throw this exception.
-	 */
-	public Bitmap getImage() throws IOException {
-		return new GathererCardImageLoader().getImage(this);
-	}
-	
 	// Parcelable methods
 
 	@Override
@@ -120,7 +128,7 @@ public class Card implements Parcelable {
 		dest.writeDouble(monetaryValue.getCurrentPrice());
 		dest.writeDouble(monetaryValue.getHighPrice());
 		dest.writeDouble(monetaryValue.getLowPrice());
-		
+		dest.writeParcelable(image, 0);	
 	}
 	
 	@Override
@@ -152,6 +160,7 @@ public class Card implements Parcelable {
 				p.readDouble(),				// Current
 				p.readDouble(),				// High
 				p.readDouble());			// Low
+		image = p.readParcelable(null);
 	}
 	
 	/**
