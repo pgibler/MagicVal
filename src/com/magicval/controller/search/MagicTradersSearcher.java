@@ -117,7 +117,7 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	
 	/**
 	 * Generates an instance of Card from a line that comes from the output
-	 * of a card search on magictraders.
+	 * of a card search on MagicTraders.
 	 * @param line The line of text to be read in and made into a Card.
 	 * @return An instance of a Card. An array indexing error will be thrown if the line is not correctly formatted.
 	 */
