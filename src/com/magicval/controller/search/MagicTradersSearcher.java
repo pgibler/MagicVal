@@ -162,7 +162,7 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	}
 	
 	private InputStream getSearchStream(String search) throws IOException {
-		String urlWithQuery = uri + "?list=magic&field=0&operator=re&target="+search.replaceAll(" ", "+");
+		String urlWithQuery = uri + "?list=magic&field=0&operator=re&target="+search.trim().replaceAll(" ", "+");
 		
 		// Target is the search query we search for cards on.
 		request = new HttpGet(urlWithQuery);
