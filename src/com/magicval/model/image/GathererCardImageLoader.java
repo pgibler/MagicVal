@@ -49,14 +49,14 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 			String cardID = firstResult.getString("ID");
 			String search = cardSearchURL + cardID;
 			Bitmap b = loadImage(search);
-			b = removeWhiteFast(b);
+			b = removeCardCornerFast(b);
 			return b;
 		} catch(JSONException e) {
 			throw new IOException("Could not read in card image properly.");
 		}
 	}
 	
-	private Bitmap removeWhiteFast(Bitmap b) {
+	private Bitmap removeCardCornerFast(Bitmap b) {
 		b = b.copy(b.getConfig(), true);
 		int bWidth = b.getWidth()-1;
 		int bHeight = b.getHeight()-1;
@@ -91,7 +91,7 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 	// We don't use this method but it has proven to be useful.
 	// Maybe some other time.
 	@SuppressWarnings("unused")
-	private Bitmap removeWhite(Bitmap b) {
+	private Bitmap removeCardCorner(Bitmap b) {
 		b = b.copy(b.getConfig(), true);
 		int bWidth = b.getWidth()-1;
 		int bHeight = b.getHeight()-1;
