@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -40,7 +38,6 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	public MagicTradersSearcher() {
 		// Prepare HTTP request
 		client = new DefaultHttpClient();
-		pattern = Pattern.compile("(.*?) (\\(\\w*\\))");
 	}
 	
 	@Override
@@ -167,16 +164,26 @@ public class MagicTradersSearcher implements Searcher<Card> {
 		}
 	}
 	
-	Pattern pattern;
-	
-	private String generateRealName(String foundName) {
-		Matcher m = pattern.matcher(foundName);
-		if(m.find())
+	private String generateRealName(String foundName)
+	{
+		int i = 0;
+		// We iterate over the characters to see if we encounter a set indicator.
+		// We want to return the substring of foundName of everything before the
+		// set indicator and the space character preceding it. This will run
+		// faster than a regular expression.
+		while(i < foundName.length())
 		{
-			return m.group(1);
-		} else {
-			return foundName;
+			char current = foundName.charAt(i);
+			if(current == ' ')
+			{
+				// This means we see the beginning of a set indicator in the card name.
+				// If this is the case, we just return everything we've seen before it.
+				if(foundName.charAt(i+1) == '(') {
+					break;
+				}
+			}
+			i++;
 		}
+		return foundName.substring(0, i);
 	}
-
 }
