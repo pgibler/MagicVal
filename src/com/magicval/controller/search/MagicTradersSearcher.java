@@ -42,16 +42,7 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	
 	@Override
 	public ArrayList<Card> searchFor(String search) throws IOException {
-		String urlWithQuery = uri + "?list=magic&field=0&operator=re&target="+search.replaceAll(" ", "+");
-		
-		// Target is the search query we search for cards on.
-		request = new HttpGet(urlWithQuery);
-		
-		// Now execute it
-		HttpResponse hr = client.execute(request);
-		
-		// Get contents of response
-		InputStream stream = hr.getEntity().getContent();
+		InputStream stream = getSearchStream(search);
 		
 		// And then parse
 		return fastRead(stream);
@@ -60,58 +51,30 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	@Override
 	public Card searchForClosestMatch(String search) throws IOException, NoMatchFoundException {
 		// This method uses an extremely naive way of finding the closest match.
-		// It simply performs a string comparison of the search against the
-		// beginning of each string that matched.
+		// It just returns the first card found.
 		
-		ArrayList<Card> cards = searchFor(search);
+		InputStream stream = getSearchStream(search);
+		
+		ArrayList<Card> cards = fastRead(stream, 1);
 		if(cards.size() == 0)
 		{
 			throw new NoMatchFoundException("No card matched the search string '"+search+"'.");
 		}
-		Card bestMatch = null;
-		String bestMatchName = null;
-		String compareName = null;
-		int strlen = search.length();
-		int closeness = 0;
-		int currCloseness = 0;
-		// We use a simple string comparison to find the closest match.
-		for(Card c : cards)
-		{
-			if(bestMatch != null)
-			{
-				compareName = c.getName();
-				if(compareName.length() < strlen)
-				{
-					continue;
-				}
-				compareName = compareName.substring(0, strlen);
-				currCloseness = Math.abs(search.compareTo(compareName));
-				if(currCloseness < closeness)
-				{
-					bestMatch = c;
-					bestMatchName = c.getName();
-					if(currCloseness == 0)
-					{
-						break;
-					}
-					closeness = currCloseness;
-				}
-			} else {
-				bestMatch = c;
-				bestMatchName = c.getName();
-				closeness = Math.abs(search.compareTo(bestMatchName));
-			}
-		}
-		return bestMatch;
+		return cards.get(0);
+	}
+	
+	private ArrayList<Card> fastRead(InputStream stream) throws IOException {
+		return fastRead(stream, -1);
 	}
 	
 	/**
 	 * Reads fast but is very dependent on the resulting content maintaining its format.
 	 * @param stream The input stream to read the cards in from.
+	 * @param numberToRead The number of cards to read in. If -1, reads in until there are none left.
 	 * @return A list of cards from the stream.
 	 * @throws IOException Throws this exception if a connection issue interrupts the search.
 	 */
-	private ArrayList<Card> fastRead(InputStream stream) throws IOException
+	private ArrayList<Card> fastRead(InputStream stream, int numberToRead) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 		List<Card> cardsTemp = new LinkedList<Card>();
@@ -124,6 +87,13 @@ public class MagicTradersSearcher implements Searcher<Card> {
 			if(readyToRead)
 			{
 				try {
+					// We decrement so that we only read in the correct number of cards.
+					if(numberToRead != -1) {
+						if(numberToRead <= 0) {
+							break;
+						}
+						numberToRead--;
+					}
 					// We attempt to parse the line and add it to the card list.
 					cardsTemp.add(generateCard(line));
 				} catch(Exception e) {
@@ -189,5 +159,18 @@ public class MagicTradersSearcher implements Searcher<Card> {
 			i++;
 		}
 		return foundName.substring(0, i);
+	}
+	
+	private InputStream getSearchStream(String search) throws IOException {
+		String urlWithQuery = uri + "?list=magic&field=0&operator=re&target="+search.replaceAll(" ", "+");
+		
+		// Target is the search query we search for cards on.
+		request = new HttpGet(urlWithQuery);
+		
+		// Now execute it
+		HttpResponse hr = client.execute(request);
+		
+		// Get contents of response
+		return hr.getEntity().getContent();
 	}
 }
