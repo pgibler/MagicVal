@@ -93,8 +93,6 @@ public class SearchForClosestMatchActivity extends Activity {
 				startActivity(i);
 			} else if(result.exception != null) {
 				showAlert(result.exception.getMessage());
-			} else {
-				showAlert("Search failed.");
 			}
 		}
 	}
