@@ -58,12 +58,16 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	}
 
 	@Override
-	public Card searchForClosestMatch(String search) throws IOException {
+	public Card searchForClosestMatch(String search) throws IOException, NoMatchFoundException {
 		// This method uses an extremely naive way of finding the closest match.
 		// It simply performs a string comparison of the search against the
 		// beginning of each string that matched.
 		
 		ArrayList<Card> cards = searchFor(search);
+		if(cards.size() == 0)
+		{
+			throw new NoMatchFoundException("No card matched the search string '"+search+"'.");
+		}
 		Card bestMatch = null;
 		String bestMatchName = null;
 		String compareName = null;
@@ -105,7 +109,7 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	 * Reads fast but is very dependent on the resulting content maintaining its format.
 	 * @param stream The input stream to read the cards in from.
 	 * @return A list of cards from the stream.
-	 * @throws IOException
+	 * @throws IOException Throws this exception if a connection issue interrupts the search.
 	 */
 	private ArrayList<Card> fastRead(InputStream stream) throws IOException
 	{

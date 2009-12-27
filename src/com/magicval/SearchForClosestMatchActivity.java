@@ -3,6 +3,7 @@ package com.magicval;
 import java.io.IOException;
 
 import com.magicval.controller.search.MagicTradersSearcher;
+import com.magicval.controller.search.NoMatchFoundException;
 import com.magicval.controller.search.Searcher;
 import com.magicval.model.card.Card;
 import com.magicval.R;
@@ -75,8 +76,8 @@ public class SearchForClosestMatchActivity extends Activity {
 				returnMe.card = c;
 			} catch (IOException e) {
 				returnMe.exception = new IOException("A connection error occured during the search");
-			} catch (IllegalArgumentException e) {
-				returnMe.exception = new IllegalArgumentException("No card could match the search input");
+			} catch (NoMatchFoundException e) {
+				returnMe.exception = e;
 			}
 			return returnMe;
 		}

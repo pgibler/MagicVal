@@ -52,7 +52,7 @@ public class MagicTradersSearcherTest extends TestCase {
 		try {
 			Card c = mtpr.searchForClosestMatch("Black Lotus");
 			assertTrue(c.getName().startsWith("Black Lotus"));
-		} catch (IllegalArgumentException e) {
+		} catch (NoMatchFoundException e) {
 			fail();
 		} catch (IOException e) {
 			fail();
