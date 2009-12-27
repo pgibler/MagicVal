@@ -76,7 +76,7 @@ public class SearchForClosestMatchActivity extends Activity {
 			} catch (IOException e) {
 				returnMe.exception = new IOException("A connection error occured during the search");
 			} catch (IllegalArgumentException e) {
-				returnMe.exception = e;
+				returnMe.exception = new IllegalArgumentException("No card could match the search input");
 			}
 			return returnMe;
 		}
@@ -94,7 +94,7 @@ public class SearchForClosestMatchActivity extends Activity {
 			} else if(result.exception != null) {
 				showAlert(result.exception.getMessage());
 			} else {
-				showAlert("No card could match the search.");
+				showAlert("Search failed.");
 			}
 		}
 	}

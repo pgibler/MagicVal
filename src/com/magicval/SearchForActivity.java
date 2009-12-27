@@ -88,7 +88,7 @@ public class SearchForActivity extends ListActivity {
 				{
 					returnMe.cards = cards;
 				} else {
-					throw new Exception("Search returned no results.");
+					throw new Exception("Search for '"+searchText+"' returned no results.");
 				}
 			} catch (Exception e) {
 				returnMe.exception = e;
