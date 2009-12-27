@@ -6,12 +6,14 @@ import com.magicval.controller.search.MagicTradersSearcher;
 import com.magicval.controller.search.Searcher;
 import com.magicval.model.card.Card;
 import com.magicval.model.card.CardArrayAdapter;
+import com.magicval.util.DialogBuilder;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -103,7 +105,13 @@ public class SearchForActivity extends ListActivity {
 			if(result.exception != null)
 			{
 				Exception e = result.exception;
-				showAlert(e.getMessage());
+				DialogBuilder.showAlert(ref, e.getMessage(), new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						ref.finish();
+					}
+				});
 			} else {
 				cards = result.cards;
 				renderCards(cards);
@@ -125,13 +133,5 @@ public class SearchForActivity extends ListActivity {
 				ref.startActivity(i);
 			}
 		});
-	}
-
-	private void showAlert(String msg) {
-		AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-		dlgAlert.setMessage(msg);
-		dlgAlert.setTitle("Search failed");
-		dlgAlert.setPositiveButton("OK", null);
-		dlgAlert.create().show();
 	}
 }

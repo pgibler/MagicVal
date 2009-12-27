@@ -6,10 +6,10 @@ import com.magicval.controller.search.MagicTradersSearcher;
 import com.magicval.controller.search.NoMatchFoundException;
 import com.magicval.controller.search.Searcher;
 import com.magicval.model.card.Card;
+import com.magicval.util.DialogBuilder;
 import com.magicval.R;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -32,12 +32,14 @@ public class SearchForClosestMatchActivity extends Activity {
 	private final Searcher<Card> mts = new MagicTradersSearcher();
 	private EditText input;
 	private ProgressDialog pd;
+	private SearchForClosestMatchActivity ref;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_for_closest_match);
         
+        ref = this;
         input = (EditText) findViewById(R.id.SearchForClosestMatchEditText);
         input.setOnKeyListener(new View.OnKeyListener() {
 			
@@ -93,9 +95,9 @@ public class SearchForClosestMatchActivity extends Activity {
 				i.putExtra("Card", result.card);
 				startActivity(i);
 			} else if(result.exception != null) {
-				showAlert(result.exception.getMessage());
+				DialogBuilder.showAlert(ref, result.exception.getMessage());
 			} else {
-				showAlert("An unexpected error occured.");
+				DialogBuilder.showAlert(ref, "An unexpected error occured.");
 			}
 		}
 	}
@@ -110,14 +112,6 @@ public class SearchForClosestMatchActivity extends Activity {
 		pd = ProgressDialog.show(this, "Performing some magic", "Retrieving list of cards", true,false);
 		String searchText = input.getText().toString();
 		new SearchForClosestMatchAsyncTask().execute(searchText);
-	}
-	
-	private void showAlert(String msg) {
-		AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-        dlgAlert.setMessage(msg);
-        dlgAlert.setTitle("Search failed");
-        dlgAlert.setPositiveButton("OK", null);
-        dlgAlert.create().show();
 	}
 	
 }
