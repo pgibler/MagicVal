@@ -109,6 +109,16 @@ public class Card implements Parcelable {
 	{
 		init(name, nameFromSearch, value);
 	}
+	
+	/**
+	 * Creates an instance of Card with no MonetaryValue.
+	 * @param name The name of the Card.
+	 * @param nameFromSearch The actual string that was the Card name.
+	 */
+	public Card(final String name, final String nameFromSearch)
+	{
+		init(name, nameFromSearch, null);
+	}
 
 	/**
 	 * Creates an instance of Card from a Parcel.

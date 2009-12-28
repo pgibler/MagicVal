@@ -2,8 +2,9 @@ package com.magicval;
 
 import java.util.ArrayList;
 
-import com.magicval.controller.search.MagicTradersSearcher;
+import com.magicval.controller.search.MultipleSourceSearcher;
 import com.magicval.controller.search.Searcher;
+import com.magicval.controller.search.sources.MagicCardSearcherSources;
 import com.magicval.model.card.Card;
 import com.magicval.model.card.CardArrayAdapter;
 import com.magicval.util.DialogBuilder;
@@ -35,7 +36,7 @@ public class SearchForActivity extends ListActivity {
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 
-		searcher = new MagicTradersSearcher();
+		searcher = new MultipleSourceSearcher<Card>(new MagicCardSearcherSources());
 		ref = this;
 
 		final Intent queryIntent = getIntent();

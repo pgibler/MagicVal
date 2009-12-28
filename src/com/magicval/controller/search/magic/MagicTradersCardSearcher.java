@@ -1,4 +1,4 @@
-package com.magicval.controller.search;
+package com.magicval.controller.search.magic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.magicval.controller.search.NoMatchFoundException;
+import com.magicval.controller.search.Searcher;
 import com.magicval.model.card.Card;
 
 /**
@@ -23,7 +25,7 @@ import com.magicval.model.card.Card;
  * @author Paul Gibler
  *
  */
-public class MagicTradersSearcher implements Searcher<Card> {
+public class MagicTradersCardSearcher implements Searcher<Card> {
 	
 	private String domain = "http://magictraders.com";
 	private String path = "/cgi-bin/query.cgi";
@@ -35,7 +37,7 @@ public class MagicTradersSearcher implements Searcher<Card> {
 	/**
 	 * Constructor for MagicTradersSearcher.
 	 */
-	public MagicTradersSearcher() {
+	public MagicTradersCardSearcher() {
 		// Prepare HTTP request
 		client = new DefaultHttpClient();
 	}

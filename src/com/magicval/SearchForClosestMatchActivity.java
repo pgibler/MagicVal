@@ -2,9 +2,10 @@ package com.magicval;
 
 import java.io.IOException;
 
-import com.magicval.controller.search.MagicTradersSearcher;
+import com.magicval.controller.search.MultipleSourceSearcher;
 import com.magicval.controller.search.NoMatchFoundException;
 import com.magicval.controller.search.Searcher;
+import com.magicval.controller.search.sources.MagicCardSearcherSources;
 import com.magicval.model.card.Card;
 import com.magicval.util.DialogBuilder;
 import com.magicval.R;
@@ -29,7 +30,7 @@ import android.widget.EditText;
  */
 public class SearchForClosestMatchActivity extends Activity {
 	
-	private final Searcher<Card> mts = new MagicTradersSearcher();
+	private Searcher<Card> mts;
 	private EditText input;
 	private ProgressDialog pd;
 	private SearchForClosestMatchActivity ref;
@@ -39,6 +40,7 @@ public class SearchForClosestMatchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_for_closest_match);
         
+        mts = new MultipleSourceSearcher<Card>(new MagicCardSearcherSources());
         ref = this;
         input = (EditText) findViewById(R.id.SearchForClosestMatchEditText);
         input.setOnKeyListener(new View.OnKeyListener() {
