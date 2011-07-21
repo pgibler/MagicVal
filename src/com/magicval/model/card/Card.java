@@ -130,8 +130,6 @@ public class Card implements Parcelable {
 	}
 	
 	// Parcelable methods
-
-	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
 		dest.writeString(nameFromSearch);
@@ -141,7 +139,6 @@ public class Card implements Parcelable {
 		dest.writeParcelable(image, 0);	
 	}
 	
-	@Override
     public int describeContents() {
         return 0;
     }

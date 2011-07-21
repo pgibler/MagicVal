@@ -42,7 +42,6 @@ public class MagicTradersCardSearcher implements Searcher<Card> {
 		client = new DefaultHttpClient();
 	}
 	
-	@Override
 	public ArrayList<Card> searchFor(String search) throws IOException {
 		InputStream stream = getSearchStream(search);
 		
@@ -50,7 +49,6 @@ public class MagicTradersCardSearcher implements Searcher<Card> {
 		return fastRead(stream);
 	}
 
-	@Override
 	public Card searchForClosestMatch(String search) throws IOException, NoMatchFoundException {
 		// This method uses an extremely naive way of finding the closest match.
 		// It just returns the first card found.

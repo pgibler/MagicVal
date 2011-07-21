@@ -38,7 +38,6 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 		client = new DefaultHttpClient();
 	}
 	
-	@Override
 	public Bitmap getImage(Card card) throws IOException {
 		String urlCardName = card.getNameForURL();
 		JSONObject jo = searchFor(urlCardName);

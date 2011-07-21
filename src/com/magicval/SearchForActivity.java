@@ -107,8 +107,6 @@ public class SearchForActivity extends ListActivity {
 			{
 				Exception e = result.exception;
 				DialogBuilder.showAlert(ref, e.getMessage(), new OnClickListener() {
-					
-					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						ref.finish();
 					}
@@ -125,8 +123,6 @@ public class SearchForActivity extends ListActivity {
 		setListAdapter(cardAdapter);
 		getListView().setTextFilterEnabled(true);
 		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Card c = cards.get(position);
 				Intent i = new Intent(ref, DisplaySingleCardActivity.class);

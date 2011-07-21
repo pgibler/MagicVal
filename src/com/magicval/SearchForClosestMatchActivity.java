@@ -44,8 +44,6 @@ public class SearchForClosestMatchActivity extends Activity {
         ref = this;
         input = (EditText) findViewById(R.id.SearchForClosestMatchEditText);
         input.setOnKeyListener(new View.OnKeyListener() {
-			
-			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				// If they hit enter just invoke the search.
 		        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {

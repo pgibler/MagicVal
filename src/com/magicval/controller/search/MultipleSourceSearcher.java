@@ -26,7 +26,6 @@ public class MultipleSourceSearcher<E extends Parcelable> implements Searcher<E>
 		searchers = source.getSearchers();
 	}
 	
-	@Override
 	public ArrayList<E> searchFor(String search) throws IOException {
 		int ioExceptions = 0;
 		int totalSearchers = searchers.size();
@@ -50,11 +49,8 @@ public class MultipleSourceSearcher<E extends Parcelable> implements Searcher<E>
 		return results;
 	}
 
-	@Override
-	public E searchForClosestMatch(String search) throws IOException,
-			NoMatchFoundException {
+	public E searchForClosestMatch(String search) throws IOException, NoMatchFoundException {
 		E result = null;
-		int matchesFailed = 0;
 		int ioExceptions = 0;
 		int totalSearchers = searchers.size();
 		for(Searcher<E> s : searchers) {
@@ -65,7 +61,6 @@ public class MultipleSourceSearcher<E extends Parcelable> implements Searcher<E>
 				ioExceptions++;
 				continue;
 			} catch (NoMatchFoundException e) {
-				matchesFailed++;
 				continue;
 			}
 		}

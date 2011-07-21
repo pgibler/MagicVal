@@ -14,8 +14,7 @@ public class MagicCardSearcherSources extends CardSearcherSources {
 		searchers = new ArrayList<Searcher<Card>>(1);
 		searchers.add(0, new MagicTradersCardSearcher());
 	}
-
-	@Override
+	
 	public ArrayList<Searcher<Card>> getSearchers() {
 		return searchers;
 	}
