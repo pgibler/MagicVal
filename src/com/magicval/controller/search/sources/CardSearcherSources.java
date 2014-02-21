@@ -1,6 +1,6 @@
 package com.magicval.controller.search.sources;
 
-import com.magicval.model.card.Card;
+import com.magicval.model.card.MagicCard;
 
 /**
  * CardSearcherSources is an abstract class that searches
@@ -8,6 +8,6 @@ import com.magicval.model.card.Card;
  * @author Paul Gibler
  *
  */
-public abstract class CardSearcherSources implements SearcherSources<Card> {
+public abstract class CardSearcherSources implements SearcherSources<MagicCard> {
 
 }

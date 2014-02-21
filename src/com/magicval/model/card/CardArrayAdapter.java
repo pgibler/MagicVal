@@ -16,14 +16,14 @@ import android.widget.TextView;
  * @author Paul Gibler
  *
  */
-public class CardArrayAdapter extends ArrayAdapter<Card> {
+public class CardArrayAdapter extends ArrayAdapter<MagicCard> {
 	
 	private LayoutInflater inflater = null;
 	private int layoutRes;
-	private List<Card> cards;
+	private List<MagicCard> cards;
 
 	public CardArrayAdapter(Context context, int textViewResourceId,
-			List<Card> objects) {
+			List<MagicCard> objects) {
 		super(context, textViewResourceId, objects);
 		
 		layoutRes = textViewResourceId;
@@ -42,11 +42,11 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
 		{
             view = convertView;
         }
-        Card card = cards.get(position);
+        MagicCard card = cards.get(position);
         TextView name = (TextView)view.findViewById(R.id.CardSearchRowName);
         TextView price = (TextView)view.findViewById(R.id.CardSearchRowPrice);
         name.setText(card.getNameFromSearch());
-        price.setText(card.getMonetaryValue().getCurrentPriceAsCurrency());
+        price.setText(card.getMonetaryValue().getMedianPriceAsCurrency());
 
         return (view);
 	}

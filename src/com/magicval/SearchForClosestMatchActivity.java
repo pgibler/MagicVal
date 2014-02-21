@@ -3,10 +3,9 @@ package com.magicval;
 import java.io.IOException;
 
 import com.magicval.controller.search.MultipleSourceSearcher;
-import com.magicval.controller.search.NoMatchFoundException;
 import com.magicval.controller.search.Searcher;
 import com.magicval.controller.search.sources.MagicCardSearcherSources;
-import com.magicval.model.card.Card;
+import com.magicval.model.card.MagicCard;
 import com.magicval.util.DialogBuilder;
 import com.magicval.R;
 
@@ -30,7 +29,7 @@ import android.widget.EditText;
  */
 public class SearchForClosestMatchActivity extends Activity {
 	
-	private Searcher<Card> mts;
+	private Searcher<MagicCard> mts;
 	private EditText input;
 	private ProgressDialog pd;
 	private SearchForClosestMatchActivity ref;
@@ -40,7 +39,7 @@ public class SearchForClosestMatchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_for_closest_match);
         
-        mts = new MultipleSourceSearcher<Card>(new MagicCardSearcherSources());
+        mts = new MultipleSourceSearcher<MagicCard>(new MagicCardSearcherSources());
         ref = this;
         input = (EditText) findViewById(R.id.SearchForClosestMatchEditText);
         input.setOnKeyListener(new View.OnKeyListener() {
@@ -63,7 +62,7 @@ public class SearchForClosestMatchActivity extends Activity {
     }
 	
 	class CardExceptionHolder {
-		public Card card  = null;
+		public MagicCard card  = null;
 		public Exception exception = null;
 	}
 	
@@ -74,12 +73,10 @@ public class SearchForClosestMatchActivity extends Activity {
 			String search = params[0];
 			CardExceptionHolder returnMe = new CardExceptionHolder();
 	    	try {
-				Card c = mts.searchForClosestMatch(search);
+				MagicCard c = mts.searchForClosestMatch(search);
 				returnMe.card = c;
 			} catch (IOException e) {
 				returnMe.exception = new IOException("A connection error occured during the search");
-			} catch (NoMatchFoundException e) {
-				returnMe.exception = e;
 			}
 			return returnMe;
 		}

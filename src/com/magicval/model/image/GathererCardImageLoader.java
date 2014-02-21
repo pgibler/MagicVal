@@ -6,12 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,9 +16,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
-import com.magicval.model.card.Card;
+import com.magicval.model.card.MagicCard;
 
-public class GathererCardImageLoader implements ImageLoader<Card> {
+public class GathererCardImageLoader implements ImageLoader<MagicCard> {
 
 	// Maybe I'll use the imageURL as a default if the card image is not loaded...
 	//private String imageURL = "http://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Magic_the_gathering-card_back.jpg/250px-Magic_the_gathering-card_back.jpg";
@@ -30,15 +26,10 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 	private String searchURL = "http://gatherer.wizards.com/Handlers/InlineCardSearch.ashx?nameFragment=";
 	private String cardSearchURL = "http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=";
 	
-	private HttpClient client;
-	private HttpUriRequest request;
-	
 	public GathererCardImageLoader() {
-		// Prepare HTTP request
-		client = new DefaultHttpClient();
 	}
 	
-	public Bitmap getImage(Card card) throws IOException {
+	public Bitmap getImage(MagicCard card) throws IOException {
 		String urlCardName = card.getNameForURL();
 		JSONObject jo = searchFor(urlCardName);
 		try
@@ -138,13 +129,9 @@ public class GathererCardImageLoader implements ImageLoader<Card> {
 		String urlWithQuery = searchURL + search;
 		
 		// Target is the search query we search for cards on.
-		request = new HttpGet(urlWithQuery);
-		
-		// Now execute it
-		HttpResponse hr = client.execute(request);
-		
-		// Get contents of response
-		InputStream stream = hr.getEntity().getContent();
+		URL url = new URL(urlWithQuery);
+		URLConnection urlConnection = url.openConnection();
+		InputStream stream = urlConnection.getInputStream();
 		
 		// And then parse
 		return readAll(stream);

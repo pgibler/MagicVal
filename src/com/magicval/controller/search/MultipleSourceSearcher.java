@@ -26,57 +26,30 @@ public class MultipleSourceSearcher<E extends Parcelable> implements Searcher<E>
 		searchers = source.getSearchers();
 	}
 	
-	public ArrayList<E> searchFor(String search) throws IOException {
-		int ioExceptions = 0;
-		int totalSearchers = searchers.size();
+	public ArrayList<E> searchFor(String search) {
 		ArrayList<E> results = new ArrayList<E>();
 		for(Searcher<E> s : searchers) {
 			try {
 				results = s.searchFor(search);
-				return results;
+				break;
 			} catch (IOException e) {
-				ioExceptions++;
 				continue;
 			}
-		}
-		/** 
-		 * If the user got IOExceptions for all searches, that means that they
-		 * probably don't have an internet connection at the moment.
-		 */
-		if(ioExceptions == totalSearchers) {
-			throw new IOException("An error occured with your connection. Please try again later.");
 		}
 		return results;
 	}
 
-	public E searchForClosestMatch(String search) throws IOException, NoMatchFoundException {
+	public E searchForClosestMatch(String search) {
 		E result = null;
-		int ioExceptions = 0;
-		int totalSearchers = searchers.size();
 		for(Searcher<E> s : searchers) {
 			try {
 				result = s.searchForClosestMatch(search);
-				return result;
+				break;
 			} catch (IOException e) {
-				ioExceptions++;
-				continue;
-			} catch (NoMatchFoundException e) {
 				continue;
 			}
 		}
-		/** 
-		 * If the user got IOExceptions for all searches, that means that they
-		 * probably don't have an internet connection at the moment.
-		 */
-		if(ioExceptions == totalSearchers) {
-			throw new IOException("An error occured with your connection. Please try again later.");
-		}
-		/**
-		 * Otherwise, assume they just couldn't match the search.
-		 */
-		else {
-			throw new NoMatchFoundException("Failed to find a match for the search '"+search+"'.");
-		}
+		return result;
 	}
 
 }

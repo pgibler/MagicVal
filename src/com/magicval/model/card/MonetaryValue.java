@@ -4,34 +4,34 @@ import java.text.DecimalFormat;
 
 public class MonetaryValue {
 	
-	private double currentPrice;
+	private double medianPrice;
 	private double highPrice;
 	private double lowPrice;
 	private DecimalFormat currencyFormat = new DecimalFormat("$0.00");
 	
-	public MonetaryValue(final double currentPrice, final double highPrice, final double lowPrice)
+	public MonetaryValue(final double medianPrice, final double highPrice, final double lowPrice)
 	{
-		setValues(currentPrice, highPrice, lowPrice);
+		setValues(medianPrice, highPrice, lowPrice);
 	}
 	
-	public MonetaryValue(final String currentPrice, final String highPrice, final String lowPrice)
+	public MonetaryValue(final String medianPrice, final String highPrice, final String lowPrice)
 	{
-		setValues(Double.valueOf(currentPrice), Double.valueOf(highPrice), Double.valueOf(lowPrice));
+		setValues(Double.valueOf(medianPrice), Double.valueOf(highPrice), Double.valueOf(lowPrice));
 	}
 	
 	/**
-	 * Returns the current price of this card.
-	 * @return The current price of this card.
+	 * Returns the median price of this card.
+	 * @return The median price of this card.
 	 */
-	public double getCurrentPrice() {
-		return currentPrice;
+	public double getMedianPrice() {
+		return medianPrice;
 	}
 	/**
-	 * Returns a nicely formatted current price using the currently set currency format.
-	 * @return A nicely formatted current price using the currently set currency format.
+	 * Returns a nicely formatted median price using the currently set currency format.
+	 * @return A nicely formatted median price using the currently set currency format.
 	 */
-	public String getCurrentPriceAsCurrency() {
-		return currencyFormat.format(currentPrice);
+	public String getMedianPriceAsCurrency() {
+		return currencyFormat.format(medianPrice);
 	}
 	/**
 	 * Returns the high price of this card.
@@ -62,9 +62,9 @@ public class MonetaryValue {
 		return currencyFormat.format(lowPrice);
 	}
 	
-	private void setValues(final double currentPrice, final double highPrice, final double lowPrice) {
+	private void setValues(final double medianPrice, final double highPrice, final double lowPrice) {
 		this.highPrice = highPrice;
 		this.lowPrice = lowPrice;
-		this.currentPrice = currentPrice;
+		this.medianPrice = medianPrice;
 	}
 }

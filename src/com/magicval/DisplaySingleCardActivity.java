@@ -2,7 +2,7 @@ package com.magicval;
 
 import java.io.IOException;
 
-import com.magicval.model.card.Card;
+import com.magicval.model.card.MagicCard;
 import com.magicval.model.card.MonetaryValue;
 import com.magicval.R;
 
@@ -21,7 +21,7 @@ public class DisplaySingleCardActivity extends Activity {
 	//private ProgressDialog pd;
 	private FrameLayout frame;
 	private DisplaySingleCardActivity ref;
-	private Card card;
+	private MagicCard card;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class DisplaySingleCardActivity extends Activity {
 	private void renderView(View result) {
 		MonetaryValue v = card.getMonetaryValue();
 		setTxt(R.id.DisplaySingleCardNameText, card.getNameFromSearch());
-        setTxt(R.id.DisplaySingleCardCurrentPriceTextView, v.getCurrentPriceAsCurrency());
+        setTxt(R.id.DisplaySingleCardMedianPriceTextView, v.getMedianPriceAsCurrency());
         setTxt(R.id.DisplaySingleCardHighPriceTextView, v.getHighPriceAsCurrency());
         setTxt(R.id.DisplaySingleCardLowPriceTextView, v.getLowPriceAsCurrency());
 		frame.addView(result);

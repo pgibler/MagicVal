@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.magicval.controller.search.MultipleSourceSearcher;
 import com.magicval.controller.search.Searcher;
 import com.magicval.controller.search.sources.MagicCardSearcherSources;
-import com.magicval.model.card.Card;
+import com.magicval.model.card.MagicCard;
 import com.magicval.model.card.CardArrayAdapter;
 import com.magicval.util.DialogBuilder;
 
@@ -27,8 +27,8 @@ import android.widget.AdapterView;
  */
 public class SearchForActivity extends ListActivity {
 
-	private Searcher<Card> searcher;
-	private ArrayList<Card> cards;
+	private Searcher<MagicCard> searcher;
+	private ArrayList<MagicCard> cards;
 	private SearchForActivity ref;
 	private ProgressDialog pd;
 
@@ -36,7 +36,7 @@ public class SearchForActivity extends ListActivity {
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 
-		searcher = new MultipleSourceSearcher<Card>(new MagicCardSearcherSources());
+		searcher = new MultipleSourceSearcher<MagicCard>(new MagicCardSearcherSources());
 		ref = this;
 
 		final Intent queryIntent = getIntent();
@@ -68,7 +68,7 @@ public class SearchForActivity extends ListActivity {
 	}
 	
 	class CardExceptionHolder {
-		public ArrayList<Card> cards  = null;
+		public ArrayList<MagicCard> cards  = null;
 		public Exception exception = null;
 	}
 
@@ -85,7 +85,7 @@ public class SearchForActivity extends ListActivity {
 			CardExceptionHolder returnMe = new CardExceptionHolder();
 			try {
 				String searchText = params[0];
-				ArrayList<Card> cards = searcher.searchFor(searchText);
+				ArrayList<MagicCard> cards = searcher.searchFor(searchText);
 
 				if(cards.size() > 0)
 				{
@@ -118,13 +118,13 @@ public class SearchForActivity extends ListActivity {
 		}
 	}
 	
-	private void renderCards(final ArrayList<Card> cards) {
+	private void renderCards(final ArrayList<MagicCard> cards) {
 		CardArrayAdapter cardAdapter = new CardArrayAdapter(ref, R.layout.card_search_row, cards);
 		setListAdapter(cardAdapter);
 		getListView().setTextFilterEnabled(true);
 		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Card c = cards.get(position);
+				MagicCard c = cards.get(position);
 				Intent i = new Intent(ref, DisplaySingleCardActivity.class);
 				i.putExtra("Card", c);
 				ref.startActivity(i);

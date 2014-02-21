@@ -31,7 +31,6 @@ public interface Searcher<E extends Parcelable> {
 	 * @param search The search string.
 	 * @return The 'closest match' to the search string. If no match is found, returns null.
 	 * @throws IOException Throws this exception if the retrieval fails because of an I/O issue.
-	 * @throws NoMatchFoundException Throws this exception if no card matches the search string.
 	 */
-	public E searchForClosestMatch(String search) throws IOException, NoMatchFoundException;
+	public E searchForClosestMatch(String search) throws IOException;
 }
