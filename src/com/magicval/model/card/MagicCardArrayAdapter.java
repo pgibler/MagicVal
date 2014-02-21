@@ -12,17 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 /**
- * CardArrayAdapter is used to display an Array or List of cards.
+ * MagicCardArrayAdapter is used to display an Array or List of cards.
  * @author Paul Gibler
  *
  */
-public class CardArrayAdapter extends ArrayAdapter<MagicCard> {
+public class MagicCardArrayAdapter extends ArrayAdapter<MagicCard> {
 	
 	private LayoutInflater inflater = null;
 	private int layoutRes;
 	private List<MagicCard> cards;
 
-	public CardArrayAdapter(Context context, int textViewResourceId,
+	public MagicCardArrayAdapter(Context context, int textViewResourceId,
 			List<MagicCard> objects) {
 		super(context, textViewResourceId, objects);
 		

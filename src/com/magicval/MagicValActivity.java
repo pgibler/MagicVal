@@ -3,7 +3,6 @@ package com.magicval;
 import com.magicval.R;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,14 +21,6 @@ public class MagicValActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.main);
-        
-        final Button searchForClosestMatchButton = (Button) findViewById(R.id.HomeSearchForClosestMatchButton);
-        searchForClosestMatchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	Intent intent = new Intent(MagicValActivity.this, SearchForClosestMatchActivity.class);
-                startActivity(intent);
-            }
-        });
         
         final Button searchForButton = (Button) findViewById(R.id.HomeSearchForButton);
         searchForButton.setOnClickListener(new View.OnClickListener() {

@@ -6,7 +6,7 @@ import com.magicval.controller.search.MultipleSourceSearcher;
 import com.magicval.controller.search.Searcher;
 import com.magicval.controller.search.sources.MagicCardSearcherSources;
 import com.magicval.model.card.MagicCard;
-import com.magicval.model.card.CardArrayAdapter;
+import com.magicval.model.card.MagicCardArrayAdapter;
 import com.magicval.util.DialogBuilder;
 
 import android.app.ListActivity;
@@ -119,7 +119,7 @@ public class SearchForActivity extends ListActivity {
 	}
 	
 	private void renderCards(final ArrayList<MagicCard> cards) {
-		CardArrayAdapter cardAdapter = new CardArrayAdapter(ref, R.layout.card_search_row, cards);
+		MagicCardArrayAdapter cardAdapter = new MagicCardArrayAdapter(ref, R.layout.card_search_row, cards);
 		setListAdapter(cardAdapter);
 		getListView().setTextFilterEnabled(true);
 		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -9,7 +9,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * A MagicCard is, for the purposes of this application, a tradable object.
+ * A MagicCard is, for the purposes of this application, a tradeable object.
  * It has a name and a price to distinguish itself.
  * MagicCards are also Parcelable for the purposes of sending them
  * between Activity instances.
@@ -40,7 +40,7 @@ public class MagicCard implements Parcelable {
 	 * @return The found name of the MagicCard.
 	 */
 	public String getNameFromSearch() {
-		return name;
+		return name + " (" + set.getSetId() + ")";
 	}
 	
 	private MonetaryValue monetaryValue;
@@ -118,7 +118,8 @@ public class MagicCard implements Parcelable {
 		dest.writeDouble(monetaryValue.getMedianPrice());
 		dest.writeDouble(monetaryValue.getHighPrice());
 		dest.writeDouble(monetaryValue.getLowPrice());
-		dest.writeParcelable(image, 0);	
+		dest.writeParcelable(image, flags);
+		dest.writeParcelable(set, flags);
 	}
 	
     public int describeContents() {
@@ -148,7 +149,8 @@ public class MagicCard implements Parcelable {
 				p.readDouble(),				// Median
 				p.readDouble(),				// High
 				p.readDouble());			// Low
-		image = p.readParcelable(null);
+		image = p.readParcelable(Bitmap.class.getClassLoader());
+		set = p.readParcelable(MagicSet.class.getClassLoader());
 	}
 	
 	/**

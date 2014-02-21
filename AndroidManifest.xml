@@ -25,12 +25,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchForClosestMatchActivity"
-            android:label="@string/search_for_closest_match_activity"
-            android:noHistory="false"
-            android:stateNotNeeded="false" >
-        </activity>
-        <activity
             android:name=".DisplaySingleCardActivity"
             android:label="@string/display_single_card_activity"
             android:noHistory="true"
