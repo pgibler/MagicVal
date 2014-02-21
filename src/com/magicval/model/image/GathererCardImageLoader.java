@@ -21,8 +21,7 @@ import com.magicval.model.card.MagicCard;
 public class GathererCardImageLoader implements ImageLoader<MagicCard> {
 
 	// Maybe I'll use the imageURL as a default if the card image is not loaded...
-	//private String imageURL = "http://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Magic_the_gathering-card_back.jpg/250px-Magic_the_gathering-card_back.jpg";
-	//private String cacheBust = "&cacheBust=1259350413520";
+	private String defaultImageURL = "http://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Magic_the_gathering-card_back.jpg/250px-Magic_the_gathering-card_back.jpg";
 	private String searchURL = "http://gatherer.wizards.com/Handlers/InlineCardSearch.ashx?nameFragment=";
 	private String cardSearchURL = "http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=";
 	
@@ -32,18 +31,20 @@ public class GathererCardImageLoader implements ImageLoader<MagicCard> {
 	public Bitmap getImage(MagicCard card) throws IOException {
 		String urlCardName = card.getNameForURL();
 		JSONObject jo = searchFor(urlCardName);
+		Bitmap b = null;
 		try
 		{
 			JSONArray resultsArray = jo.getJSONArray("Results");
 			JSONObject firstResult = (JSONObject)resultsArray.get(0);
 			String cardID = firstResult.getString("ID");
 			String search = cardSearchURL + cardID;
-			Bitmap b = loadImage(search);
+			b = loadImage(search);
 			b = removeCardCornerFast(b);
-			return b;
 		} catch(JSONException e) {
-			throw new IOException("Could not read in card image properly.");
+			b = loadImage(defaultImageURL);
+			b = removeCardCornerFast(b);
 		}
+		return b;
 	}
 	
 	private Bitmap removeCardCornerFast(Bitmap b) {
@@ -74,53 +75,6 @@ public class GathererCardImageLoader implements ImageLoader<MagicCard> {
 			}
 			y = 0;  
 			x++;
-		}
-		return b;
-	}
-	
-	// We don't use this method but it has proven to be useful.
-	// Maybe some other time.
-	@SuppressWarnings("unused")
-	private Bitmap removeCardCorner(Bitmap b) {
-		b = b.copy(b.getConfig(), true);
-		int bWidth = b.getWidth()-1;
-		int bHeight = b.getHeight()-1;
-		int x = 0;
-		int y = 0;
-		int currentPixel;
-		while(y < bHeight)
-		{
-			// Remove the non-black pixels both ways.
-			while(x < bWidth)
-			{
-				// Alter current pixel.
-				b.setPixel(x,y,Color.TRANSPARENT);
-				// Alter pixel opposite horizontally, same y.
-				b.setPixel(bWidth-x,y,Color.TRANSPARENT);
-				// Alter pixel opposite vertically, same x.
-				b.setPixel(x,bHeight-y,Color.TRANSPARENT);
-				// Alter pixel opposite horizontally and vertically.
-				b.setPixel(bWidth-x,bHeight-y,Color.TRANSPARENT);
-				
-				x++;
-				
-				currentPixel = b.getPixel(x, y);
-				
-				// If we see a black pixel, go to the next row.
-				if(x >= bWidth || currentPixel < Color.GRAY)
-				{
-					break;
-				}
-			}
-			x = 0;  
-			y++;
-			
-			currentPixel = b.getPixel(x, y);
-			
-			if(y >= bHeight || currentPixel < Color.GRAY)
-			{
-				break;
-			}
 		}
 		return b;
 	}

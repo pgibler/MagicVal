@@ -25,18 +25,21 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:baselineAligned="false"
-        android:gravity="center" >
+        android:gravity="center"
+        android:orientation="vertical" >
 
         <FrameLayout
             android:id="@+id/DisplaySingleCardImageFrameLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
+
         </FrameLayout>
+
     </LinearLayout>
     
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="130dp"
+        android:layout_height="160dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="5dp" >

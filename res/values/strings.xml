@@ -16,6 +16,8 @@
     <string name="median_price_label">Median:</string>
     <string name="prices_label">Prices</string>
     
+    <string name="loading_text">Loading</string>
+    
     <string name="card_name_textview_placeholder">Card Name</string>
     
     <string name="search_for_closest_match_edit_text_hint">Input card name</string>
@@ -24,5 +26,5 @@
     
     <string name="card_search_row_name">Name</string>
     <string name="card_search_row_price">Price</string>
-
+    
 </resources>

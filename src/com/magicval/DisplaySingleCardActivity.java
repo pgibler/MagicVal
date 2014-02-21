@@ -8,17 +8,19 @@ import com.magicval.R;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DisplaySingleCardActivity extends Activity {
 	
-	//private ProgressDialog pd;
 	private FrameLayout frame;
 	private DisplaySingleCardActivity ref;
 	private MagicCard card;
@@ -32,41 +34,41 @@ public class DisplaySingleCardActivity extends Activity {
         
         Bundle b = getIntent().getExtras();
         
+        card = getCard(b);
+        displayPriceData();
+        
         frame = (FrameLayout) findViewById(R.id.DisplaySingleCardImageFrameLayout);
         
-        View v = generateView(b);
-        renderView(v);
-        
-        // TODO Properly use AsyncTask to load the image.
-        
-        //pd = ProgressDialog.show(this, "Rendering", "Rendering card data", true,false);
-        //new DisplaySingleCardImageTask().execute(b);
-		//pd.dismiss();
+        // Run image loading background task.
+        new DisplaySingleCardImageTask().execute(b);
 	}
 	
-	/*class DisplaySingleCardImageTask extends AsyncTask<Bundle, Void, View>
+	class DisplaySingleCardImageTask extends AsyncTask<Bundle, Void, View>
 	{
 
 		@Override
 		protected View doInBackground(Bundle... params) {
-			return generateView(params[0]);
+			return generateCardView();
 		}
 		
 		@Override
 		protected void onPostExecute(View result) {
-			pd.dismiss();
+			Animation fadeInAnimation = AnimationUtils.loadAnimation(ref, R.anim.fadein);
+			result.startAnimation(fadeInAnimation);
+			
 			renderView(result);
 		}
 		
-	}*/
+	}
 	
-	private View generateView(Bundle b) {
+	private MagicCard getCard(Bundle b) {
+		return b.getParcelable("Card");
+	}
+
+	private View generateCardView() {
 		View v = null;
 		try {
-			card = b.getParcelable("Card");
-        	// TODO Make it so that if the user clicks on the card image,
-        	// it expands to the center of the screen for easier viewing.
-        	Bitmap cardImage = card.getImage();
+			Bitmap cardImage = card.getImage();
         	ImageView image = new ImageView(ref);
             int val = 15;
             image.setPadding(val, val, val, val);
@@ -84,14 +86,17 @@ public class DisplaySingleCardActivity extends Activity {
 		return v;
 	}
 	
-	private void renderView(View result) {
+	private void displayPriceData()
+	{
 		MonetaryValue v = card.getMonetaryValue();
 		setTxt(R.id.DisplaySingleCardNameText, card.getNameFromSearch());
         setTxt(R.id.DisplaySingleCardMedianPriceTextView, v.getMedianPriceAsCurrency());
         setTxt(R.id.DisplaySingleCardHighPriceTextView, v.getHighPriceAsCurrency());
         setTxt(R.id.DisplaySingleCardLowPriceTextView, v.getLowPriceAsCurrency());
+	}
+	
+	private void renderView(View result) {
 		frame.addView(result);
-		
 	}
 	
 	private void setTxt(int viewid, String txt)
