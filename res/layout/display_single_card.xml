@@ -5,19 +5,19 @@
 
 
 
-<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="8" android:gravity="center"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Card Name" android:id="@+id/DisplaySingleCardNameText" android:textStyle="bold" android:textSize="25px"></TextView>
+<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="8" android:gravity="center"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@+id/card_name_label" android:id="@+id/DisplaySingleCardNameText" android:textStyle="bold" android:textSize="25sp"></TextView>
 </LinearLayout>
-<LinearLayout android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="fill_parent" android:gravity="center" android:id="@+id/DisplaySingleCardBodyLinearLayout">
+<LinearLayout android:baselineAligned="false" android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="fill_parent" android:gravity="center" android:id="@+id/DisplaySingleCardBodyLinearLayout">
 
 
 
-<FrameLayout android:id="@+id/DisplaySingleCardImageFrameLayout" android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="1"></FrameLayout><LinearLayout android:orientation="vertical" android:gravity="center" android:padding="5px" android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="1"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prices" android:textSize="20px"></TextView><TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:padding="10px"><TableRow android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Median:" android:padding="2px"></TextView>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="2px" android:textStyle="bold" android:id="@+id/DisplaySingleCardMedianPriceTextView"></TextView>
+<FrameLayout android:id="@+id/DisplaySingleCardImageFrameLayout" android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="1"></FrameLayout><LinearLayout android:orientation="vertical" android:gravity="center" android:padding="5dp" android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="1"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@+id/prices_label" android:textSize="20dp"></TextView><TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:padding="10dp"><TableRow android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@+id/median_price_label" android:padding="2dp"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="2dp" android:textStyle="bold" android:id="@+id/DisplaySingleCardMedianPriceTextView"></TextView>
 </TableRow>
-<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="High:" android:padding="2px"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="2px" android:id="@+id/DisplaySingleCardHighPriceTextView"></TextView>
+<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="" android:padding="2dp"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="2dp" android:id="@+id/DisplaySingleCardHighPriceTextView"></TextView>
 
 
-</TableRow><TableRow android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Low:" android:padding="2px"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="2px" android:id="@+id/DisplaySingleCardLowPriceTextView"></TextView></TableRow>
+</TableRow><TableRow android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="" android:padding="2dp"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="2dp" android:id="@+id/DisplaySingleCardLowPriceTextView"></TextView></TableRow>
 
 </TableLayout></LinearLayout>
 </LinearLayout>

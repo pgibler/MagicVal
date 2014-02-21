@@ -1,39 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="1"
-      android:versionName="1.1" package="com.magicval" xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:label="@string/app_name" android:name=".MagicValActivity">
-            
-        <intent-filter>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.magicval"
+    android:versionCode="1"
+    android:versionName="1.1" >
+
+    <!-- Target SDK version - 4.4 Jellybean -->
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+    
+    <uses-permission android:name="android.permission.INTERNET"  />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".MagicValActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-</activity>
-        
+        </activity>
+        <activity
+            android:name=".SearchForClosestMatchActivity"
+            android:label="@string/search_for_closest_match_activity"
+            android:noHistory="false"
+            android:stateNotNeeded="false" >
+        </activity>
+        <activity
+            android:name=".DisplaySingleCardActivity"
+            android:label="@string/display_single_card_activity"
+            android:noHistory="true"
+            android:stateNotNeeded="true" >
+        </activity>
+        <activity
+            android:name=".SearchForActivity"
+            android:label="@string/search_for_activity"
+            android:launchMode="standard"
+            android:noHistory="false"
+            android:stateNotNeeded="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" >
+                </action>
 
-    <activity android:stateNotNeeded="false" android:noHistory="false" android:label="@string/search_for_closest_match_activity" android:name=".SearchForClosestMatchActivity">
-	</activity>
-    
- 
-	
-<activity android:stateNotNeeded="true" android:noHistory="true" android:label="@string/display_single_card_activity" android:name=".DisplaySingleCardActivity">
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+            </intent-filter>
 
-</activity>
-<activity android:label="@string/search_for_activity" android:name=".SearchForActivity" android:noHistory="false" android:stateNotNeeded="false" android:launchMode="standard"><intent-filter>
-	
-    
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
 
-<action android:name="android.intent.action.SEARCH"></action><category android:name="android.intent.category.DEFAULT"></category>
-</intent-filter>
-<meta-data android:name="android.app.searchable" 
-                       android:resource="@xml/searchable" />
-</activity>
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchForActivity" >
+        </meta-data>
+    </application>
 
-
-<meta-data android:name="android.app.default_searchable" android:value=".SearchForActivity"></meta-data>
-</application>
-    <uses-sdk android:minSdkVersion="8"/>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
-
-</manifest> 
+</manifest>

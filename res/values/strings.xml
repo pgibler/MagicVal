@@ -12,4 +12,9 @@
 
 <string name="search_for_activity">Search For Cards</string>
 <string name="search_label">Search</string>
+<string name="card_name_label">Card Name</string>
+<string name="high_price_label">High:</string>
+<string name="low_price_label">Low:</string>
+<string name="median_price_label">Median:</string>
+<string name="prices_label">Prices</string>
 </resources>
