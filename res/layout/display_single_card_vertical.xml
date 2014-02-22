@@ -5,48 +5,39 @@
     android:layout_gravity="center_horizontal"
     android:orientation="vertical" >
 
-    <FrameLayout
-        android:id="@+id/DisplaySingleCardBodyTableLayout"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:baselineAligned="false"
-        android:orientation="vertical" >
-        
-        <LinearLayout
-            android:id="@+id/DisplaySingleCardContainerLinearLayout"
+        android:layout_height="35dp"
+        android:layout_margin="5dp"
+        android:gravity="top|center" >
+
+        <com.magicval.customviews.AutoResizeTextView
+            android:id="@+id/DisplaySingleCardNameText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="60dp"
+            android:text="@+string/card_name_label"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/DisplaySingleCardContainerLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.32"
+        android:gravity="bottom|center"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:id="@+id/DisplaySingleCardImageFrameLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:gravity="bottom|center"
             android:orientation="horizontal" >
-
-            <FrameLayout
-                android:id="@+id/DisplaySingleCardImageFrameLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="bottom|center"
-                android:orientation="horizontal" >
-            </FrameLayout>
-        </LinearLayout>
-        
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="top|center"
-            android:layout_margin="5dp"
-            android:gravity="top|center" >
-
-            <TextView
-                android:id="@+id/DisplaySingleCardNameText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@+string/card_name_label"
-                android:textSize="25sp"
-                android:textStyle="bold" >
-            </TextView>
-        </LinearLayout>
-    </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -78,7 +69,6 @@
                     android:layout_gravity="right"
                     android:padding="4dp"
                     android:text="@+string/median_price_label" >
-
                 </TextView>
 
                 <TextView
@@ -100,7 +90,6 @@
                     android:layout_gravity="right"
                     android:padding="2dp"
                     android:text="@+string/high_price_label" >
-
                 </TextView>
 
                 <TextView
@@ -121,7 +110,6 @@
                     android:layout_gravity="right"
                     android:padding="2dp"
                     android:text="@+string/low_price_label" >
-
                 </TextView>
 
                 <TextView

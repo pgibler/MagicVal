@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:orientation="vertical" android:weightSum="9">
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
 
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:layout_weight="8"
-		android:gravity="center">
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="35dp"
+	    android:layout_margin="5dp"
+	    android:gravity="center" >
 
-		<TextView android:id="@+id/DisplaySingleCardNameText"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/card_name_label" android:textSize="25sp"
-			android:textStyle="bold" />
+		<com.magicval.customviews.AutoResizeTextView
+		    android:id="@+id/DisplaySingleCardNameText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_gravity="center"
+		    android:gravity="center"
+		    android:text="@+string/card_name_label"
+		    android:textSize="40sp"
+		    android:textStyle="bold" />
 
 	</LinearLayout>
 
-
-	<TableRow android:id="@+id/DisplaySingleCardBodyTableLayout"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:layout_weight="1" android:baselineAligned="false"
-		android:gravity="center" android:orientation="vertical"
-		android:stretchColumns="*" android:padding="5dp">
+	<TableRow
+	    android:id="@+id/DisplaySingleCardBodyTableLayout"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:baselineAligned="false"
+	    android:gravity="center"
+	    android:orientation="vertical"
+	    android:padding="5dp"
+	    android:stretchColumns="*" >
 
 		<FrameLayout android:id="@+id/DisplaySingleCardImageFrameLayout"
 			android:layout_width="0dip" android:layout_height="fill_parent"
