@@ -1,17 +1,18 @@
-package com.magicval.controller.search.sources;
+package com.magicval.search;
 
 import java.util.ArrayList;
-
-import com.magicval.controller.search.Searcher;
 
 import android.os.Parcelable;
 
 /**
  * SearcherSources maintains all Searcher types for the
- * particular generic type.
+ * particular Parcelable type. In this application, we use it
+ * to search for Magic Cards, but in theory we could search for
+ * anything we want, such as baseball cards.
+ * 
  * @author Paul Gibler
  *
- * @param <E> The generic type that can be searched for.
+ * @param <E> The Parcelable type that can be searched for.
  */
 public interface SearcherSources<E extends Parcelable> {
 	/**

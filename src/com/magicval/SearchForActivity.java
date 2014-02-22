@@ -2,12 +2,12 @@ package com.magicval;
 
 import java.util.ArrayList;
 
-import com.magicval.controller.search.MultipleSourceSearcher;
-import com.magicval.controller.search.Searcher;
-import com.magicval.controller.search.sources.MagicCardSearcherSources;
-import com.magicval.model.card.MagicCard;
-import com.magicval.model.card.MagicCardArrayAdapter;
-import com.magicval.util.DialogBuilder;
+import com.magicval.card.MagicCard;
+import com.magicval.card.MagicCardArrayAdapter;
+import com.magicval.search.MagicCardSearcherSources;
+import com.magicval.search.MultipleSourceSearcher;
+import com.magicval.search.Searcher;
+import com.magicval.viewtools.DialogBuilder;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;

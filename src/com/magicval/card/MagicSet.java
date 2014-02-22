@@ -1,4 +1,4 @@
-package com.magicval.model.card;
+package com.magicval.card;
 
 import android.os.Parcel;
 import android.os.Parcelable;

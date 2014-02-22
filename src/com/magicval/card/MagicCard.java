@@ -1,8 +1,8 @@
-package com.magicval.model.card;
+package com.magicval.card;
 
 import java.io.IOException;
 
-import com.magicval.model.image.GathererCardImageLoader;
+import com.magicval.image.GathererCardImageLoader;
 
 import android.graphics.Bitmap;
 import android.os.Parcel;

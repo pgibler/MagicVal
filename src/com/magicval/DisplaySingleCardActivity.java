@@ -2,8 +2,8 @@ package com.magicval;
 
 import java.io.IOException;
 
-import com.magicval.model.card.MagicCard;
-import com.magicval.model.card.MonetaryValue;
+import com.magicval.card.MagicCard;
+import com.magicval.card.MonetaryValue;
 import com.magicval.R;
 
 import android.app.Activity;
@@ -20,14 +20,40 @@ import android.widget.ImageView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+/**
+ * Displays a single card, loaded through the Bundle, onto the screen.
+ * The card metadata is displayed immediately, and the card image is
+ * requested from the Gatherer search engine.
+ * 
+ * @author Paul Gibler
+ *
+ */
 public class DisplaySingleCardActivity extends Activity {
 	
-	private FrameLayout frame;
 	private DisplaySingleCardActivity ref;
+	
+	/**
+	 * Container for the card image or error message,
+	 * whichever is returned by the image fetch task.
+	 */
+	private FrameLayout frame;
+	
+	/**
+	 * The current card
+	 */
 	private MagicCard card;
+	
+	/**
+	 * Stores the current image
+	 */
 	private View cachedImageView;
 	
-	public void setCachedImageView(View view)
+	/**
+	 * Sets the current child view of the frame.
+	 * This is exposed so AsyncTasks can set the child view frame of the FrameLayout.
+	 * @param view The view to set as the only child of the center FrameLayout.
+	 */
+	public void setFrameChildView(View view)
 	{
 		this.cachedImageView = view;
 	}
@@ -75,7 +101,7 @@ public class DisplaySingleCardActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(View result) {
-			ref.setCachedImageView(result);
+			ref.setFrameChildView(result);
 			ref.animateView(result);
 			
 			renderView(result);

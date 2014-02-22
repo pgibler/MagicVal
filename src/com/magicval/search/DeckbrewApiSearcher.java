@@ -1,4 +1,4 @@
-package com.magicval.controller.search.magic;
+package com.magicval.search;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,9 +30,8 @@ import ch.boye.httpclientandroidlib.impl.client.CloseableHttpClient;
 import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 import ch.boye.httpclientandroidlib.impl.client.HttpClients;
 
-import com.magicval.controller.search.Searcher;
-import com.magicval.model.card.MagicCard;
-import com.magicval.model.card.MagicSet;
+import com.magicval.card.MagicCard;
+import com.magicval.card.MagicSet;
 
 /**
  * DeckbrewApiSearcher performs a card information search on the website

@@ -1,10 +1,8 @@
-package com.magicval.controller.search.sources;
+package com.magicval.search;
 
 import java.util.ArrayList;
 
-import com.magicval.controller.search.Searcher;
-import com.magicval.controller.search.magic.DeckbrewApiSearcher;
-import com.magicval.model.card.MagicCard;
+import com.magicval.card.MagicCard;
 
 public class MagicCardSearcherSources extends CardSearcherSources {
 	

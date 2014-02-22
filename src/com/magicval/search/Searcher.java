@@ -1,4 +1,4 @@
-package com.magicval.controller.search;
+package com.magicval.search;
 
 import java.io.IOException;
 import java.util.ArrayList;

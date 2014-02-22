@@ -1,6 +1,6 @@
-package com.magicval.controller.search.sources;
+package com.magicval.search;
 
-import com.magicval.model.card.MagicCard;
+import com.magicval.card.MagicCard;
 
 /**
  * CardSearcherSources is an abstract class that searches

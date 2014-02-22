@@ -1,4 +1,4 @@
-package com.magicval.model.image;
+package com.magicval.image;
 
 import java.util.ArrayList;
 

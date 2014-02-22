@@ -1,4 +1,4 @@
-package com.magicval.model.image;
+package com.magicval.image;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
-import com.magicval.model.card.MagicCard;
+import com.magicval.card.MagicCard;
 
 public class GathererCardImageLoader implements ImageLoader<MagicCard> {
 

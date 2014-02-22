@@ -1,9 +1,15 @@
-package com.magicval.util;
+package com.magicval.viewtools;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 
+/**
+ * Handy tool for building alert dialogs in a standard manner.
+ * 
+ * @author Paul Gibler
+ *
+ */
 public class DialogBuilder {
 	private DialogBuilder() {}
 	

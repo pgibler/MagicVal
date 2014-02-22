@@ -1,4 +1,4 @@
-package com.magicval.model.card;
+package com.magicval.card;
 
 import java.text.DecimalFormat;
 
