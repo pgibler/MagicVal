@@ -7,6 +7,7 @@ import com.magicval.model.card.MonetaryValue;
 import com.magicval.R;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,8 +16,8 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class DisplaySingleCardActivity extends Activity {
@@ -24,11 +25,25 @@ public class DisplaySingleCardActivity extends Activity {
 	private FrameLayout frame;
 	private DisplaySingleCardActivity ref;
 	private MagicCard card;
+	private View cachedImageView;
+	
+	public void setCachedImageView(View view)
+	{
+		this.cachedImageView = view;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.display_single_card);
+        
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+		{
+			setContentView(R.layout.display_single_card_horizontal);
+		}
+		else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+		{
+			setContentView(R.layout.display_single_card_vertical);
+		}
         
         ref = this;
         
@@ -40,7 +55,14 @@ public class DisplaySingleCardActivity extends Activity {
         frame = (FrameLayout) findViewById(R.id.DisplaySingleCardImageFrameLayout);
         
         // Run image loading background task.
-        new DisplaySingleCardImageTask().execute(b);
+        if(cachedImageView == null)
+        {
+        	new DisplaySingleCardImageTask().execute(b);
+        }
+        else
+        {
+        	animateView(cachedImageView);
+        }
 	}
 	
 	class DisplaySingleCardImageTask extends AsyncTask<Bundle, Void, View>
@@ -53,12 +75,18 @@ public class DisplaySingleCardActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(View result) {
-			Animation fadeInAnimation = AnimationUtils.loadAnimation(ref, R.anim.fadein);
-			result.startAnimation(fadeInAnimation);
+			ref.setCachedImageView(result);
+			ref.animateView(result);
 			
 			renderView(result);
 		}
 		
+	}
+	
+	public void animateView(View view)
+	{
+		Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
+		view.startAnimation(fadeInAnimation);
 	}
 	
 	private MagicCard getCard(Bundle b) {
@@ -73,6 +101,9 @@ public class DisplaySingleCardActivity extends Activity {
             int val = 15;
             image.setPadding(val, val, val, val);
 			image.setImageBitmap(cardImage);
+			image.setLayoutParams(new LayoutParams(
+					LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT));
 	        v = image;
 		} catch (IOException e) {
 			TextView text = new TextView(ref);

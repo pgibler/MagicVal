@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" android:weightSum="9">
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:layout_weight="8"
+		android:gravity="center">
+
+		<TextView android:id="@+id/DisplaySingleCardNameText"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="@string/card_name_label" android:textSize="25sp"
+			android:textStyle="bold" />
+
+	</LinearLayout>
+
+
+	<TableRow android:id="@+id/DisplaySingleCardBodyTableLayout"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_weight="1" android:baselineAligned="false"
+		android:gravity="center" android:orientation="vertical"
+		android:stretchColumns="*" android:padding="5dp">
+
+		<FrameLayout android:id="@+id/DisplaySingleCardImageFrameLayout"
+			android:layout_width="0dip" android:layout_height="fill_parent"
+			android:layout_weight="1" />
+
+
+		<LinearLayout android:layout_width="0dip"
+			android:layout_height="fill_parent" android:layout_gravity="center"
+			android:gravity="center" android:orientation="vertical"
+			android:layout_weight="1">
+
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/prices_label"
+				android:textSize="20sp" />
+
+
+			<TableLayout android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:gravity="center"
+				android:padding="10dp">
+
+				<TableRow android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+
+					<TextView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_gravity="right"
+						android:padding="2sp" android:text="@string/median_price_label" />
+					
+					<TextView
+					    android:id="@+id/DisplaySingleCardMedianPriceTextView"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:padding="2sp"
+					    android:textStyle="bold" />
+
+				</TableRow>
+
+				<TableRow android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+
+					<TextView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_gravity="right"
+						android:padding="2sp" android:text="@string/high_price_label" />
+
+
+
+					<TextView android:id="@+id/DisplaySingleCardHighPriceTextView"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:padding="2dp" />
+
+				</TableRow>
+
+				<TableRow android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+
+					<TextView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_gravity="right"
+						android:padding="2sp" android:text="@string/low_price_label" />
+
+
+
+					<TextView android:id="@+id/DisplaySingleCardLowPriceTextView"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:padding="2sp" />
+
+				</TableRow>
+			</TableLayout>
+		</LinearLayout>
+	</TableRow>
+
+</LinearLayout>

@@ -14,7 +14,9 @@
     <application
         android:allowBackup="false"
         android:icon="@drawable/icon"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:configChanges="orientation|keyboardHidden" >
+        
         <activity
             android:name=".MagicValActivity"
             android:label="@string/app_name" >
