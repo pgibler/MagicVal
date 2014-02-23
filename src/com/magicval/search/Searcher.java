@@ -22,15 +22,4 @@ public interface Searcher<E extends Parcelable> {
 	 * @throws IOException Throws this exception if the retrieval fails.
 	 */
 	public ArrayList<E> searchFor(String search) throws IOException;
-	
-	/**
-	 * Performs a 'closest match' to the search string. That is, uses some sort of
-	 * method of deciding which string is closest to the search string. On ties,
-	 * one will be selected arbitrarily.
-	 * Any leading or trailing whitespace will be removed.
-	 * @param search The search string.
-	 * @return The 'closest match' to the search string. If no match is found, returns null.
-	 * @throws IOException Throws this exception if the retrieval fails because of an I/O issue.
-	 */
-	public E searchForClosestMatch(String search) throws IOException;
 }

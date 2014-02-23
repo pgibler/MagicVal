@@ -9,6 +9,7 @@ import com.magicval.R;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -123,6 +124,9 @@ public class DisplaySingleCardActivity extends Activity {
 		View v = null;
 		try {
 			Bitmap cardImage = card.getImage();
+			
+			cardImage = adjustOpacity(cardImage, 0);
+			
         	ImageView image = new ImageView(ref);
             int val = 15;
             image.setPadding(val, val, val, val);
@@ -141,6 +145,22 @@ public class DisplaySingleCardActivity extends Activity {
 			v = text;
 		}
 		return v;
+	}
+	
+	/**
+	 * @param bitmap The source bitmap.
+	 * @param opacity a value between 0 (completely transparent) and 255 (completely
+	 * opaque).
+	 * @return The opacity-adjusted bitmap.  If the source bitmap is mutable it will be
+	 * adjusted and returned, otherwise a new bitmap is created.
+	 */
+	private Bitmap adjustOpacity(Bitmap bitmap, int opacity)
+	{
+	    Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+	    Canvas canvas = new Canvas(mutableBitmap);
+	    int colour = (opacity & 0xFF) << 24;
+	    canvas.drawColor(colour, android.graphics.PorterDuff.Mode.DST_IN);
+	    return mutableBitmap;
 	}
 	
 	private void displayPriceData()

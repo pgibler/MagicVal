@@ -37,17 +37,4 @@ public class MultipleSourceSearcher<E extends Parcelable> implements Searcher<E>
 		return results;
 	}
 
-	public E searchForClosestMatch(String search) {
-		E result = null;
-		for(Searcher<E> s : searchers) {
-			try {
-				result = s.searchForClosestMatch(search);
-				break;
-			} catch (IOException e) {
-				continue;
-			}
-		}
-		return result;
-	}
-
 }

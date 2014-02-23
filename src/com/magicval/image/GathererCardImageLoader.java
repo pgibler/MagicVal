@@ -14,7 +14,9 @@ import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Color;
+import android.graphics.Point;
 
 import com.magicval.card.MagicCard;
 
@@ -28,57 +30,97 @@ public class GathererCardImageLoader implements ImageLoader<MagicCard> {
 	public GathererCardImageLoader() {
 	}
 	
+	/**
+	 * Gets the image of the Magic Card by pulling it down from it's Gatherer address.
+	 * 
+	 * @param card The MagicCard to get the image of.
+	 */
 	public Bitmap getImage(MagicCard card) throws IOException {
 		String urlCardName = card.getNameForURL();
 		JSONObject jo = searchFor(urlCardName);
-		Bitmap b = null;
 		try
 		{
 			JSONArray resultsArray = jo.getJSONArray("Results");
 			JSONObject firstResult = (JSONObject)resultsArray.get(0);
 			String cardID = firstResult.getString("ID");
 			String search = cardSearchURL + cardID;
-			b = loadImage(search);
-			b = removeCardCornerFast(b);
+			return
+					removeCardCornerFaster(
+							loadImage(search));
 		} catch(JSONException e) {
-			b = loadImage(defaultImageURL);
-			b = removeCardCornerFast(b);
+			return
+					removeCardCornerFaster(
+							loadImage(defaultImageURL));
+		}
+	}
+	
+	private Point[] points = new Point[] {
+			// Row 1
+			new Point(0,0),
+			new Point(1,0),
+			new Point(2,0),
+			new Point(3,0),
+			new Point(4,0),
+			new Point(5,0),
+			new Point(6,0),
+			
+			// Row 2
+			new Point(0,1),
+			new Point(1,1),
+			new Point(2,1),
+			new Point(3,1),
+			new Point(4,1),
+			
+			// Row 3
+			new Point(0,2),
+			new Point(1,2),
+			new Point(2,2),
+			
+			// Row 4
+			new Point(0,3),
+			new Point(1,3),
+			
+			// Row 5
+			new Point(0,4),
+			new Point(1,4),
+			
+			// Row 6
+			new Point(0,5),
+			
+			// Row 7
+			new Point(0,6)
+	};
+	
+	private Bitmap removeCardCornerFaster(Bitmap b) {
+		// Copy the bitmap
+		b = b.copy(b.getConfig(), true);
+		
+		int bWidth = b.getWidth()-1;
+		int bHeight = b.getHeight()-1;
+		
+		for(int i = 0; i < points.length; i++)
+		{
+			Point p = points[i];
+			
+			int x = p.x;
+			int y = p.y;
+			
+			// Alter current pixel.
+			setPixelTransparent(b,x,y);
+			// Alter pixel opposite horizontally, same y.
+			setPixelTransparent(b,bWidth-x,y);
+			// Alter pixel opposite vertically, same x.
+			setPixelTransparent(b,x,bHeight-y);
+			// Alter pixel opposite horizontally and vertically.
+			setPixelTransparent(b,bWidth-x,bHeight-y );
 		}
 		return b;
 	}
 	
-	private Bitmap removeCardCornerFast(Bitmap b) {
-		b = b.copy(b.getConfig(), true);
-		int bWidth = b.getWidth()-1;
-		int bHeight = b.getHeight()-1;
-		// r is the radius
-		int r = bWidth/20;
-		int x = 0;
-		int y = 0;
-		int yMax = 0;
-		while(x < r)
-		{
-			// Remove the non-black pixels both ways.
-			yMax = r - (int)Math.sqrt(2*x*r-x^2);
-			while(y < yMax)
-			{
-				// Alter current pixel.
-				b.setPixel(x,y,Color.TRANSPARENT);
-				// Alter pixel opposite horizontally, same y.
-				b.setPixel(bWidth-x,y,Color.TRANSPARENT);
-				// Alter pixel opposite vertically, same x.
-				b.setPixel(x,bHeight-y,Color.TRANSPARENT);
-				// Alter pixel opposite horizontally and vertically.
-				b.setPixel(bWidth-x,bHeight-y,Color.TRANSPARENT);
-				
-				y++;
-			}
-			y = 0;  
-			x++;
-		}
-		return b;
+	private void setPixelTransparent(Bitmap b, int x, int y) {
+		b.setPixel(x,y,Color.TRANSPARENT);
 	}
-
+	
 	private JSONObject searchFor(String search) throws IOException {
 		String urlWithQuery = searchURL + search;
 		
@@ -95,9 +137,13 @@ public class GathererCardImageLoader implements ImageLoader<MagicCard> {
 		HttpURLConnection conn = (HttpURLConnection) new URL(search).openConnection();
 		conn.setDoInput(true);
 		conn.connect();
+		
+		Options opts = new Options();
+		opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
 		InputStream inStream = conn.getInputStream();
-		Bitmap bitmap = BitmapFactory.decodeStream(inStream);
+		Bitmap bitmap = BitmapFactory.decodeStream(inStream, null, opts);
 		inStream.close();
+		
 		conn.disconnect();
 		return bitmap;
 	}
