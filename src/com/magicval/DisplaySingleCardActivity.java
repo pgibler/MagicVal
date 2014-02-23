@@ -2,14 +2,13 @@ package com.magicval;
 
 import java.io.IOException;
 
+import com.magicval.R;
 import com.magicval.card.MagicCard;
 import com.magicval.card.MonetaryValue;
-import com.magicval.R;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -21,40 +20,14 @@ import android.widget.ImageView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-/**
- * Displays a single card, loaded through the Bundle, onto the screen.
- * The card metadata is displayed immediately, and the card image is
- * requested from the Gatherer search engine.
- * 
- * @author Paul Gibler
- *
- */
 public class DisplaySingleCardActivity extends Activity {
 	
-	private DisplaySingleCardActivity ref;
-	
-	/**
-	 * Container for the card image or error message,
-	 * whichever is returned by the image fetch task.
-	 */
 	private FrameLayout frame;
-	
-	/**
-	 * The current card
-	 */
+	private DisplaySingleCardActivity ref;
 	private MagicCard card;
-	
-	/**
-	 * Stores the current image
-	 */
 	private View cachedImageView;
 	
-	/**
-	 * Sets the current child view of the frame.
-	 * This is exposed so AsyncTasks can set the child view frame of the FrameLayout.
-	 * @param view The view to set as the only child of the center FrameLayout.
-	 */
-	public void setFrameChildView(View view)
+	public void setCachedImageView(View view)
 	{
 		this.cachedImageView = view;
 	}
@@ -102,7 +75,7 @@ public class DisplaySingleCardActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(View result) {
-			ref.setFrameChildView(result);
+			ref.setCachedImageView(result);
 			ref.animateView(result);
 			
 			renderView(result);
@@ -124,9 +97,6 @@ public class DisplaySingleCardActivity extends Activity {
 		View v = null;
 		try {
 			Bitmap cardImage = card.getImage();
-			
-			cardImage = adjustOpacity(cardImage, 0);
-			
         	ImageView image = new ImageView(ref);
             int val = 15;
             image.setPadding(val, val, val, val);
@@ -145,22 +115,6 @@ public class DisplaySingleCardActivity extends Activity {
 			v = text;
 		}
 		return v;
-	}
-	
-	/**
-	 * @param bitmap The source bitmap.
-	 * @param opacity a value between 0 (completely transparent) and 255 (completely
-	 * opaque).
-	 * @return The opacity-adjusted bitmap.  If the source bitmap is mutable it will be
-	 * adjusted and returned, otherwise a new bitmap is created.
-	 */
-	private Bitmap adjustOpacity(Bitmap bitmap, int opacity)
-	{
-	    Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-	    Canvas canvas = new Canvas(mutableBitmap);
-	    int colour = (opacity & 0xFF) << 24;
-	    canvas.drawColor(colour, android.graphics.PorterDuff.Mode.DST_IN);
-	    return mutableBitmap;
 	}
 	
 	private void displayPriceData()
