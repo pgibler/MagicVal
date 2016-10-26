@@ -7,8 +7,26 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="054c578430ab5c474561aeec405d5533b6949c9c">
+        sha1="55751f44b4e6254e965d7af56e21a2b314b909bf">
         <dex dex="G:\Development\MagicVal\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_ab6571f3a99a3b4e9653a5b044b0d38ffbc734a5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\Development\MagicVal\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1edcdf486219cc07510cffdb4274b22d307b46e4">
+        <dex dex="G:\Development\MagicVal\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_9fc144e1583f39d18daa8fc9fbe6718600c89e09\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\Development\MagicValUpdated\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="425657315a366748e162187478221e10453ad661">
+        <dex dex="G:\Development\MagicValUpdated\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_1cd26e220aeeaeae4da1342abc90a89cd57ef7a2\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -27,24 +45,6 @@
         revision="25.0.0"
         sha1="d884b9ed1234ce24ae00913167760836bf089050">
         <dex dex="G:\Development\MagicValUpdated\app\build\intermediates\transforms\dex\debug\folders\1000\2\httpclientandroidlib-1.2.0_73260ec416c647b1eae5c8c948182ab62405dba7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Development\MagicVal\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="01c9f7e20f9ea18a926be55ad4a92d0cf5db4a6c">
-        <dex dex="G:\Development\MagicVal\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_9fc144e1583f39d18daa8fc9fbe6718600c89e09\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Development\MagicValUpdated\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="425657315a366748e162187478221e10453ad661">
-        <dex dex="G:\Development\MagicValUpdated\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_1cd26e220aeeaeae4da1342abc90a89cd57ef7a2\classes.dex" />
     </item>
     <item
         is-multidex="true"
