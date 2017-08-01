@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <searchable
-  xmlns:android="http://schemas.android.com/apk/res/android" android:hint="Input partial or full card name" android:includeInGlobalSearch="false" android:queryAfterZeroResults="false" android:label="@string/search_for_activity">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:hint="Input partial or full card name"
+  android:label="@string/search_for_activity">
 </searchable>

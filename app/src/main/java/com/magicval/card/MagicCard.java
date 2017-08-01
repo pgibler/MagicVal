@@ -85,8 +85,12 @@ public class MagicCard implements Parcelable {
      * @param high   The highest price the MagicCard has been.
      * @param low    The lowest price the MagicCard has been.
      */
-    public MagicCard(final String name, final double median, final double high, final double low, MagicSet set) {
+    public MagicCard(final String name, final Double median, final Double high, final Double low, MagicSet set) {
         init(name, new MonetaryValue(median, high, low), set);
+    }
+
+    public MagicCard(final String name, final Double price, final MagicSet set) {
+        init(name, new MonetaryValue(price), set);
     }
 
     /**
@@ -101,9 +105,9 @@ public class MagicCard implements Parcelable {
     // Parcelable methods
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeDouble(monetaryValue.getMedianPrice());
-        dest.writeDouble(monetaryValue.getHighPrice());
-        dest.writeDouble(monetaryValue.getLowPrice());
+        dest.writeValue(monetaryValue.getMedianPrice());
+        dest.writeValue(monetaryValue.getHighPrice());
+        dest.writeValue(monetaryValue.getLowPrice());
         dest.writeParcelable(image, flags);
         dest.writeParcelable(set, flags);
     }
@@ -131,9 +135,9 @@ public class MagicCard implements Parcelable {
     private void readFromParcel(Parcel p) {
         name = p.readString();    // Name From Search
         monetaryValue = new MonetaryValue(
-                p.readDouble(),                // Median
-                p.readDouble(),                // High
-                p.readDouble());            // Low
+                (Double)p.readValue(Double.class.getClassLoader()),     // Median
+                (Double)p.readValue(Double.class.getClassLoader()),     // High
+                (Double)p.readValue(Double.class.getClassLoader()));    // Low
         image = p.readParcelable(Bitmap.class.getClassLoader());
         set = p.readParcelable(MagicSet.class.getClassLoader());
     }

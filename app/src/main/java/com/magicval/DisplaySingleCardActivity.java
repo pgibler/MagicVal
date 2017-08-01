@@ -84,7 +84,7 @@ public class DisplaySingleCardActivity extends Activity {
     }
 
     private View generateCardView() {
-        View v = null;
+        View v;
         try {
             Bitmap cardImage = card.getImage();
             ImageView image = new ImageView(ref);
@@ -110,6 +110,7 @@ public class DisplaySingleCardActivity extends Activity {
     private void displayPriceData() {
         MonetaryValue v = card.getMonetaryValue();
         setTxt(R.id.DisplaySingleCardNameText, card.getNameAndSetId());
+
         setTxt(R.id.DisplaySingleCardMedianPriceTextView, v.getMedianPriceAsCurrency());
         setTxt(R.id.DisplaySingleCardHighPriceTextView, v.getHighPriceAsCurrency());
         setTxt(R.id.DisplaySingleCardLowPriceTextView, v.getLowPriceAsCurrency());

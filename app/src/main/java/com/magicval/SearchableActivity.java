@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.magicval.card.MagicCard;
 import com.magicval.card.MagicCardArrayAdapter;
-import com.magicval.search.DeckbrewApiSearcher;
 import com.magicval.search.MultiSourceSearcher;
+import com.magicval.search.ScryfallApiSearcher;
 import com.magicval.search.SearchRequestResult;
 import com.magicval.search.Searcher;
 import com.magicval.viewtools.DialogBuilder;
@@ -26,11 +26,11 @@ import android.widget.AdapterView;
  *
  * @author Paul Gibler
  */
-public class SearchForActivity extends ListActivity {
+public class SearchableActivity extends ListActivity {
 
     private Searcher<MagicCard> searcher;
     private ArrayList<MagicCard> cards;
-    private SearchForActivity ref;
+    private SearchableActivity ref;
     private ProgressDialog pd;
 
     @Override
@@ -38,7 +38,7 @@ public class SearchForActivity extends ListActivity {
         super.onCreate(bundle);
 
         searcher = new MultiSourceSearcher<MagicCard>(new Searcher[]{
-                new DeckbrewApiSearcher()
+                new ScryfallApiSearcher()
         });
         ref = this;
 
@@ -66,7 +66,6 @@ public class SearchForActivity extends ListActivity {
             //hideKeyboard();
             new SearchForAsyncTask().execute(query);
         }
-
     }
 
     class CardExceptionHolder {
